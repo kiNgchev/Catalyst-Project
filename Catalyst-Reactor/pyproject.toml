@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "catalyst-reactor"
+version = "0.1.0"
+description = "Script engine for Catalyst discord bot"
+authors = ["KiNgchev <ketone.git@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+jinja2 = "^3.1.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
