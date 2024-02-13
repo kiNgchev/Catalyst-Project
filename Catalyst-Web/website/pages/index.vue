@@ -2,11 +2,11 @@
   <div class="container">
     <div class="navbar">
       <ul>
-        <li><h1>Catalyst</h1></li>
+        <li><h1>ㅤㅤCatalyst</h1></li>
         <li><a href="#">Home</a></li>
         <li><a href="#">Invite</a></li>
         <li><a href="#">Dashboard</a></li>
-        <li class="profile-btn"><a href="#">Profile</a></li>
+        <li class="profile-btn"><a href="#">Profileㅤㅤ</a></li>
       </ul>
     </div>
   </div>
@@ -14,6 +14,7 @@
 
 <style>
 * {
+  user-select: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -50,7 +51,7 @@ ul {
 }
 
 li {
-  margin-right: auto;
+  margin-right: 10px;
 }
 
 li:last-child {
