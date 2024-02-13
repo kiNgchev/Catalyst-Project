@@ -48,14 +48,11 @@ ul {
   display: flex;
   align-items: center;
   width: 100%;
+  text-align: center;
 }
 
 li {
-  margin-right: 10px;
-}
-
-li:last-child {
-  margin-right: 0;
+  margin-right: auto;
 }
 
 li a {
@@ -65,6 +62,7 @@ li a {
   padding: 16px;
   text-decoration: none;
   border-radius: 25px;
+  margin: 0 10px;
 }
 
 li h1 {
@@ -80,5 +78,4 @@ li h1 {
 .profile-btn a {
   background: none;
 }
-
 </style>
