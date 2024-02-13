@@ -21,7 +21,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #242424;
+  background-color: #141417;
 }
 
 .container {
@@ -63,12 +63,15 @@ li a {
   text-decoration: none;
   border-radius: 25px;
   margin: 0 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 li h1 {
   color: white;
   font-size: 1.5rem;
   margin-right: auto;
+  font-weight: 800;
 }
 
 .profile-btn {
