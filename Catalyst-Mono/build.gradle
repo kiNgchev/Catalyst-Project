@@ -1,0 +1,116 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+buildscript {
+    ext {
+        kotlinVersion       = '1.9.22'
+        kotlinExtVersion    = '2.0.0-Beta2'
+        springBootVersion   = '3.2.2'
+        hibernateVersion    = '6.4.1.Final'
+        jdaVersion          = '5.0.0-beta.19'
+        guavaVersion        = '33.0.0-jre'
+        junitVersion        = '5.9.1'
+        author = 'kiNgchev'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath "org.hibernate.orm:hibernate-gradle-plugin:${hibernateVersion}"
+        classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinExtVersion}")
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.hibernate.orm'
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'org.jetbrains.kotlin.plugin.spring'
+    apply plugin: 'org.jetbrains.kotlin.plugin.jpa'
+
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    group = 'net.kingchev'
+    version = '0.0.1-SNAPSHOT'
+
+    java {
+        sourceCompatibility = '21'
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        //No-spring implementations
+        implementation "net.dv8tion:JDA:5.0.0-beta.19"
+        //Spring implementations
+        implementation 'redis.clients:jedis'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-amqp'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+        implementation 'org.springframework.boot:spring-boot-starter-quartz'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+        implementation 'org.jetbrains.kotlin:kotlin-reflect'
+        implementation 'io.micrometer:micrometer-registry-prometheus'
+        //Dev dependencies
+        developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+        //Compile only
+        compileOnly 'org.projectlombok:lombok'
+        //runtime only
+        runtimeOnly 'org.postgresql:postgresql'
+        //Annotation processors
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        //Test implementations
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.amqp:spring-rabbit-test'
+        testImplementation 'org.springframework.security:spring-security-test'
+    }
+
+    hibernate {
+        enhancement {
+            enableAssociationManagement = true
+        }
+    }
+
+    tasks.withType(KotlinCompile) {
+        kotlinOptions {
+            freeCompilerArgs += '-Xjsr305=strict'
+            jvmTarget = '21'
+        }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+ext {
+    moduleName = 'Catalyst-Parent'
+}
