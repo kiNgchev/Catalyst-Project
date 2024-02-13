@@ -13,6 +13,10 @@
 </template>
 
 <style>
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -49,10 +53,10 @@ li a {
 
 }
 
-li a:hover {
+/*li a:hover {
   background-color: #000;
   color: white;
-}
+}*/
 
 .profile-btn {
   float: right;
