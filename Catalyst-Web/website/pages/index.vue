@@ -3,10 +3,10 @@
     <div class="navbar">
       <ul>
         <li><h1>ㅤㅤCatalyst</h1></li>
-        <li><a>Home</a></li>
-        <li><a>Invite</a></li>
-        <li><a>Dashboard</a></li>
-        <li class="profile-btn"><a>Profileㅤㅤ</a></li>
+        <li><button>Home</button></li>
+        <li><button @click="navigateTo('/Invite')">Invite</button></li>
+        <li><button @click="navigateTo('/Dashboard')">Dashboard</button></li>
+        <li class="profile-btn"><button @click="navigateTo('/Profile')">Profileㅤㅤ</button></li>
       </ul>
     </div>
   </div>
@@ -56,15 +56,18 @@ li {
   margin-right: auto;
 }
 
-li a {
+li button {
   display: block;
   color: white;
   text-align: center;
+  background: none;
+  border: none;
   padding: 16px;
   text-decoration: none;
   border-radius: 25px;
   margin: 0 10px;
   font-size: 1.2rem;
+  cursor: pointer;
   font-weight: 600;
 }
 
