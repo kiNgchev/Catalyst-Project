@@ -3,14 +3,15 @@
     <div class="navbar">
       <ul>
         <li><h1>ㅤㅤCatalyst</h1></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Invite</a></li>
-        <li><a href="#">Dashboard</a></li>
-        <li class="profile-btn"><a href="#">Profileㅤㅤ</a></li>
+        <li><a>Home</a></li>
+        <li><a>Invite</a></li>
+        <li><a>Dashboard</a></li>
+        <li class="profile-btn"><a>Profileㅤㅤ</a></li>
       </ul>
     </div>
   </div>
 </template>
+
 
 <style>
 * {
