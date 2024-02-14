@@ -6,7 +6,7 @@
         <li><button>Home</button></li>
         <li><button @click="navigateTo('/Invite')">Invite</button></li>
         <li><button @click="navigateTo('/Dashboard')">Dashboard</button></li>
-        <li class="profile-btn"><button @click="navigateTo('/Profile')">Profileㅤㅤ</button></li>
+        <li class="profile-btn"><button @click="navigateTo('/Profile')">Profile</button></li>
       </ul>
     </div>
   </div>
