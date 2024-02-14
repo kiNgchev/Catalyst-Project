@@ -1,0 +1,33 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+apply plugin: 'application'
+
+description = "Catalyst Bot Api Module"
+
+ext {
+    moduleName = 'Catalyst-Worker'
+}
+
+application {
+    mainClassName = 'net.kingchev.catalyst.ru.Launcher'
+}
+
+bootJar {
+    mainClass = 'net.kingchev.catalyst.ru.Launcher'
+}
+
+dependencies {
+    implementation project(':Catalyst-Modules')
+    implementation project(':Catalyst-Core')
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+}
+
+processResources {
+    filesMatching("**/application.yml") {
+        filter ReplaceTokens, tokens: [
+                "application.version"       : project.version,
+                "application.author"        : author
+        ]
+    }
+}

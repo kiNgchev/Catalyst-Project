@@ -1,0 +1,21 @@
+description = "Module container for Catalyst Bot"
+
+ext {
+    moduleName = 'Catalyst-Modules'
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+test {
+    enabled = false
+}
+
+dependencies {
+    implementation project(":Catalyst-Core")
+}

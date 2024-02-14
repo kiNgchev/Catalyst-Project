@@ -1,0 +1,18 @@
+description = "Catalyst Bot Core Module"
+
+ext {
+    moduleName = 'Catalyst-Core'
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    api 'org.liquibase:liquibase-core'
+    api("com.google.guava:guava:${guavaVersion}")
+}
