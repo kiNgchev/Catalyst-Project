@@ -13,7 +13,8 @@
     </div>
     <div class="content-container">
       <div class="developers-container">
-        <h1>Developers</h1>
+        <h3>TEAM</h3>
+        <h1>Developers of project</h1>
         <br>
         <h2>OpenStation(KYBEX11) - Frontend DeveloperㅤㅤkiNgchev - Founder, Backend Developer</h2>
       </div>
