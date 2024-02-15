@@ -15,7 +15,7 @@
       <div class="developers-container">
         <h1>Developers</h1>
         <br>
-        <h2>OpenStation(KYBEX11) - Frontend DeveloperㅤㅤkiNgchev - Backend Developer</h2>
+        <h2>OpenStation(KYBEX11) - Frontend DeveloperㅤㅤkiNgchev - Founder, Backend Developer</h2>
       </div>
     </div>
   </div>
