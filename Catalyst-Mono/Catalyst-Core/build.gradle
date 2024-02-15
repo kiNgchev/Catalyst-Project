@@ -16,3 +16,7 @@ dependencies {
     api 'org.liquibase:liquibase-core'
     api("com.google.guava:guava:${guavaVersion}")
 }
+
+allOpen {
+    annotations("jakarta.persistence.Entity", "jakarta.persistence.MappedSuperclass", "jakarta.persistence.Embedabble")
+}
