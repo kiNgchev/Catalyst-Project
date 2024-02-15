@@ -1,13 +1,22 @@
 <template>
-  <div class="container">
-    <div class="navbar">
-      <ul>
-        <li><h1>ㅤㅤCatalyst</h1></li>
-        <li><button>Home</button></li>
-        <li><button @click="navigateTo('/Invite')">Invite</button></li>
-        <li><button @click="navigateTo('/Dashboard')">Dashboard</button></li>
-        <li class="profile-btn"><button @click="navigateTo('/Profile')">Profile</button></li>
-      </ul>
+  <div class="">
+    <div class="navbar-container">
+      <div class="navbar">
+        <ul>
+          <li><h1>ㅤㅤCatalyst</h1></li>
+          <li><button @click="navigateTo('/')">Home</button></li>
+          <li><button @click="navigateTo('/Invite')">Invite</button></li>
+          <li><button @click="navigateTo('/Dashboard')">Dashboard</button></li>
+          <li class="profile-btn"><button @click="navigateTo('/Profile')">Profile</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-container">
+      <div class="developers-container">
+        <h1>Developers</h1>
+        <br>
+        <h2>OpenStation(KYBEX11) - Frontend DeveloperㅤㅤkiNgchev - Backend Developer</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -25,9 +34,16 @@ body {
   background-color: #141417;
 }
 
-.container {
+.navbar-container {
   display: flex;
   justify-content: center;
+}
+
+.content-container {
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
 }
 
 .navbar {
