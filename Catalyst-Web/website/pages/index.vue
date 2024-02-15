@@ -15,8 +15,10 @@
       <div class="developers-container">
         <h3>TEAM</h3>
         <h1>Developers of project</h1>
-        <br>
-        <h2>OpenStation(KYBEX11) - Frontend DeveloperㅤㅤkiNgchev - Founder, Backend Developer</h2>
+        <br><img src="/avatars/OpenStationDev.png" alt="OpenStation" class="developers-picture">
+        <h2>OpenStation(KYBEX11) - Frontend Developer</h2>
+        <img src="/avatars/kiNgchev.gif" alt="kiNgchev" class="developers-picture">
+        <h2>kiNgchev - Founder, Backend Developer</h2>
       </div>
     </div>
   </div>
@@ -38,6 +40,12 @@ body {
 .navbar-container {
   display: flex;
   justify-content: center;
+}
+
+.developers-picture {
+  width: 100px;
+  border-radius: 20px;
+  height: 100px;
 }
 
 .content-container {
