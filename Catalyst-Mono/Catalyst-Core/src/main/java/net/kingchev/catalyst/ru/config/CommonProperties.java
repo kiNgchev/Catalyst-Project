@@ -1,5 +1,6 @@
 package net.kingchev.catalyst.ru.config;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,10 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Component
-@ConfigurationProperties("net.kingchev.catalyst.ru")
+@ConfigurationProperties("core")
 @PropertySource("classpath:core-properties.yaml")
 public class CommonProperties {
     private Jmx jmx = new Jmx();
