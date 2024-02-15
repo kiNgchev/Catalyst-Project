@@ -6,7 +6,7 @@ import java.util.Objects
 
 @Entity
 @MappedSuperclass
-data class BaseEntity(
+abstract class BaseEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
