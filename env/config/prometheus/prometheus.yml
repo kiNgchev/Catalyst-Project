@@ -22,8 +22,6 @@ scrape_configs:
     static_configs:
       - targets:
         - 'host.docker.internal:15692'
-        - 'host.docker.internal:15693'
-        - 'host.docker.internal:15694'
 
 ############ Redis ############
   ## config for scraping the exporter itself
