@@ -16,39 +16,6 @@ services:
       - "5672:5672"
       - "15672:15672"
       - "15692:15692"
-  rabbitmq-slave-1:
-    image: rabbitmq:management
-    hostname: rabbitmq-s1
-    environment:
-      - "RABBITMQ_ERLANG_COOKIE=secret string"
-      - "RABBITMQ_NODENAME=rabbit-s1"
-      - "RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq.config"
-    volumes:
-      - "./config/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config"
-      - "./config/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json"
-    depends_on:
-      - rabbitmq-master
-    ports:
-      - "5673:5672"
-      - "15673:15672"
-      - "15693:15692"
-  rabbitmq-slave-2:
-    image: rabbitmq:management
-    hostname: rabbitmq-s2
-    environment:
-      - "RABBITMQ_ERLANG_COOKIE=secret string"
-      - "RABBITMQ_NODENAME=rabbit-s2"
-      - "RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq.config"
-    volumes:
-      - "./config/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config"
-      - "./config/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json"
-    depends_on:
-      - rabbitmq-master
-      - rabbitmq-slave-1
-    ports:
-      - "5674:5672"
-      - "15674:15672"
-      - "15694:15692"
 
   # Redis
   redis-1:
