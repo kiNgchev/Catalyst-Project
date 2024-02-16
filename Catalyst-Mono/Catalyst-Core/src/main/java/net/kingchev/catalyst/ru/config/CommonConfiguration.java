@@ -20,7 +20,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @EnableJpaRepositories
 @EnableRedisRepositories
 @ComponentScan(basePackages = {"net.kingchev.catalyst.ru"})
-@EnableAutoConfiguration(exclude = RabbitAutoConfiguration.class)
 public class CommonConfiguration {
     public final static String SCHEDULER = "taskScheduler";
 
