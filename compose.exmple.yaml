@@ -1,0 +1,265 @@
+name: "containtername"
+
+services:
+  # RabbitMQ
+  rabbitmq-master:
+    image: rabbitmq:management
+    hostname: rabbitmq-m
+    environment:
+      - "RABBITMQ_ERLANG_COOKIE=secret string"
+      - "RABBITMQ_NODENAME=rabbit-master"
+      - "RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq.config"
+    volumes:
+      - "./config/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config"
+      - "./config/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "15692:15692"
+  rabbitmq-slave-1:
+    image: rabbitmq:management
+    hostname: rabbitmq-s1
+    environment:
+      - "RABBITMQ_ERLANG_COOKIE=secret string"
+      - "RABBITMQ_NODENAME=rabbit-s1"
+      - "RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq.config"
+    volumes:
+      - "./config/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config"
+      - "./config/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json"
+    depends_on:
+      - rabbitmq-master
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+      - "15693:15692"
+  rabbitmq-slave-2:
+    image: rabbitmq:management
+    hostname: rabbitmq-s2
+    environment:
+      - "RABBITMQ_ERLANG_COOKIE=secret string"
+      - "RABBITMQ_NODENAME=rabbit-s2"
+      - "RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq.config"
+    volumes:
+      - "./config/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config"
+      - "./config/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json"
+    depends_on:
+      - rabbitmq-master
+      - rabbitmq-slave-1
+    ports:
+      - "5674:5672"
+      - "15674:15672"
+      - "15694:15692"
+
+  # Redis
+  redis-1:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    command: "redis-server /usr/local/etc/redis/redis.conf"
+    volumes:
+      - "./docker-data/redis-1:/data"
+      - "./config/redis/redis-1/redis.conf:/usr/local/etc/redis/redis.conf"
+
+  #Exporter
+  redis-exporter:
+    image: oliver006/redis_exporter
+    ports:
+      - "9121:9121"
+  # Metrics
+  grafana:
+    build: env/config/grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - "./docker-data/grafana:/var/lib/grafana"
+    environment:
+      - "GF_SECURITY_ADMIN_USER=your"
+      - "GF_SECURITY_ADMIN_PASSWORD=yourpassword"
+    networks:
+      - monitoring
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./docker-data/prometheus:/prometheus"
+    networks:
+      - monitoring
+  #MySQL
+  pg-1:
+    image: docker.io/bitnami/postgresql-repmgr:latest
+    ports:
+      - "6432:5432"
+    volumes:
+      - "./docker-data/postgres-1:/bitnami/postgresql"
+      - "./config/postgres/create_extensions.sql:/docker-entrypoint-initdb.d/create_extensions.sql:ro"
+    environment:
+      - "POSTGRESQL_POSTGRES_PASSWORD=adminsecret"
+      - "POSTGRESQL_USERNAME=root"
+      - "POSTGRESQL_PASSWORD=secret"
+      - "POSTGRESQL_DATABASE=your"
+      - "REPMGR_PASSWORD=repmgrpassword"
+      - "REPMGR_PRIMARY_HOST=pg-1"
+      - "REPMGR_PRIMARY_PORT=5432"
+      - "REPMGR_PARTNER_NODES=pg-1,pg-2,pg-3:5432"
+      - "REPMGR_NODE_NAME=pg-1"
+      - "REPMGR_NODE_NETWORK_NAME=pg-1"
+      - "REPMGR_PORT_NUMBER=5432"
+      - "REPMGR_CONNECT_TIMEOUT=1"
+      - "REPMGR_RECONNECT_ATTEMPTS=2"
+      - "REPMGR_RECONNECT_INTERVAL=1"
+      - "REPMGR_MASTER_RESPONSE_TIMEOUT=5"
+    restart: unless-stopped
+    networks:
+      - postgres
+
+  pg-2:
+    image: docker.io/bitnami/postgresql-repmgr:latest
+    ports:
+      - "6433:5432"
+    volumes:
+      - "./docker-data/postgres-2:/bitnami/postgresql"
+      - "./config/postgres/create_extensions.sql:/docker-entrypoint-initdb.d/create_extensions.sql:ro"
+    environment:
+      - "POSTGRESQL_POSTGRES_PASSWORD=adminsecret"
+      - "POSTGRESQL_USERNAME=root"
+      - "POSTGRESQL_PASSWORD=secret"
+      - "POSTGRESQL_DATABASE=your"
+      - "REPMGR_PASSWORD=repmgrpassword"
+      - "REPMGR_PRIMARY_HOST=pg-1"
+      - "REPMGR_PRIMARY_PORT=5432"
+      - "REPMGR_PARTNER_NODES=pg-1,pg-2,pg-3:5432"
+      - "REPMGR_NODE_NAME=pg-2"
+      - "REPMGR_NODE_NETWORK_NAME=pg-2"
+      - "REPMGR_PORT_NUMBER=5432"
+      - "REPMGR_CONNECT_TIMEOUT=1"
+      - "REPMGR_RECONNECT_ATTEMPTS=2"
+      - "REPMGR_RECONNECT_INTERVAL=1"
+      - "REPMGR_MASTER_RESPONSE_TIMEOUT=5"
+    restart: unless-stopped
+    networks:
+      - postgres
+  pg-3:
+    image: docker.io/bitnami/postgresql-repmgr:latest
+    ports:
+      - "6434:5432"
+    volumes:
+      - "./docker-data/postgres-3:/bitnami/postgresql"
+      - "./config/postgres/create_extensions.sql:/docker-entrypoint-initdb.d/create_extensions.sql:ro"
+    environment:
+      - "POSTGRESQL_POSTGRES_PASSWORD=adminsecret"
+      - "POSTGRESQL_USERNAME=root"
+      - "POSTGRESQL_PASSWORD=secret"
+      - "POSTGRESQL_DATABASE=your"
+      - "REPMGR_PASSWORD=repmgrpassword"
+      - "REPMGR_PRIMARY_HOST=pg-1"
+      - "REPMGR_PRIMARY_PORT=5432"
+      - "REPMGR_PARTNER_NODES=pg-1,pg-2,pg-3:5432"
+      - "REPMGR_NODE_NAME=pg-3"
+      - "REPMGR_NODE_NETWORK_NAME=pg-3"
+      - "REPMGR_PORT_NUMBER=5432"
+      - "REPMGR_CONNECT_TIMEOUT=1"
+      - "REPMGR_RECONNECT_ATTEMPTS=2"
+      - "REPMGR_RECONNECT_INTERVAL=1"
+      - "REPMGR_MASTER_RESPONSE_TIMEOUT=5"
+    restart: unless-stopped
+    networks:
+      - postgres
+
+  postgres-exporter-1:
+    image: prometheuscommunity/postgres-exporter:v0.11.1
+    command: "--log.level=debug"
+    environment:
+      DATA_SOURCE_URI: "pg-1:5432/your?sslmode=disable"
+      DATA_SOURCE_USER: root
+      DATA_SOURCE_PASS: secret
+      PG_EXPORTER_EXTEND_QUERY_PATH: "/etc/postgres_exporter/queries.yaml"
+    volumes:
+      - "./config/postgres/queries.yaml:/etc/postgres_exporter/queries.yaml:ro"
+    ports:
+      - "9187:9187"
+    networks:
+      - postgres
+    restart: unless-stopped
+    depends_on:
+      - pg-1
+  postgres-exporter-2:
+    image: prometheuscommunity/postgres-exporter:v0.11.1
+    command: "--log.level=debug"
+    environment:
+      DATA_SOURCE_URI: "pg-2:5432/your?sslmode=disable"
+      DATA_SOURCE_USER: root
+      DATA_SOURCE_PASS: secret
+      PG_EXPORTER_EXTEND_QUERY_PATH: "/etc/postgres_exporter/queries.yaml"
+    volumes:
+      - "./config/postgres/queries.yaml:/etc/postgres_exporter/queries.yaml:ro"
+    ports:
+      - "9188:9187"
+    networks:
+      - postgres
+    restart: unless-stopped
+    depends_on:
+      - pg-2
+  postgres-exporter-3:
+    image: prometheuscommunity/postgres-exporter:v0.11.1
+    command: "--log.level=debug"
+    environment:
+      DATA_SOURCE_URI: "pg-3:5432/your?sslmode=disable"
+      DATA_SOURCE_USER: root
+      DATA_SOURCE_PASS: secret
+      PG_EXPORTER_EXTEND_QUERY_PATH: "/etc/postgres_exporter/queries.yaml"
+    volumes:
+      - "./config/postgres/queries.yaml:/etc/postgres_exporter/queries.yaml:ro"
+    ports:
+      - "9189:9187"
+    networks:
+      - postgres
+    restart: unless-stopped
+    depends_on:
+      - pg-2
+
+  your-backend:
+    image: openjdk:21
+    networks:
+      catalyst-network:
+        ipv4_address: 192.168.0.0
+    ports:
+      - "8080:8080"
+      - "8081:8080"
+    volumes:
+      - "./your-Web:home/node/Catalyst-Mono"
+
+  your-web:
+    image: node:18
+    networks:
+      catalyst-network:
+        ipv4_address: 192.168.0.1
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./your-Web:home/node/Catalyst-Web"
+  your-reactor:
+    image: python:3.11
+    networks:
+      catalyst-network:
+        ipv4_address: 192.168.0.2
+    ports:
+      - "8082"
+    volumes:
+      - "./your-Web:home/node/Catalyst-Reactor"
+
+networks:
+  catalyst-network:
+    name: your-network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/24
+  postgres:
+    name: postgres
+    driver: bridge
+  monitoring:
+    name: monitoring
