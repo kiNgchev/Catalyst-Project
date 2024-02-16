@@ -48,6 +48,11 @@ body {
   height: 100px;
 }
 
+.developers-container h3 {
+  font-weight: 1000;
+  color: #B0ADFF;
+}
+
 .content-container {
   justify-content: center;
   align-items: center;
