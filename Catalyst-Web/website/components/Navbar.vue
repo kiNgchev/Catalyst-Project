@@ -1,19 +1,16 @@
 <template>
-  <div class="">
-    <Navbar/>
-    <div class="content-container">
-      <div class="developers-container">
-        <h3>TEAM</h3>
-        <h1>Developers of project</h1>
-        <br><img src="/avatars/OpenStationDev.png" alt="OpenStation" class="developers-picture">
-        <h2>OpenStation(KYBEX11) - Frontend Developer</h2>
-        <img src="/avatars/kiNgchev.gif" alt="kiNgchev" class="developers-picture">
-        <h2>kiNgchev - Founder, Backend Developer</h2>
-      </div>
+  <div class="navbar-container">
+    <div class="navbar">
+      <ul>
+        <li><h1 style="color: #B0ADFF;">ㅤㅤCatalyst</h1></li>
+        <li><button @click="navigateTo('/')">Home</button></li>
+        <li><button onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=1207361111062609951&permissions=0&scope=bot'">Invite</button></li>
+        <li><button @click="navigateTo('/Dashboard')">Dashboard</button></li>
+        <li class="profile-btn"><button @click="navigateTo('/Profile')">Profile</button></li>
+      </ul>
     </div>
   </div>
 </template>
-
 
 <style>
 * {
