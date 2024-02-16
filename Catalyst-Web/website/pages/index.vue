@@ -3,7 +3,7 @@
     <div class="navbar-container">
       <div class="navbar">
         <ul>
-          <li><h1>ㅤㅤCatalyst</h1></li>
+          <li><h1 style="color: #B0ADFF;">ㅤㅤCatalyst</h1></li>
           <li><button @click="navigateTo('/')">Home</button></li>
           <li><button onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=1207361111062609951&permissions=0&scope=bot'">Invite</button></li>
           <li><button @click="navigateTo('/Dashboard')">Dashboard</button></li>
