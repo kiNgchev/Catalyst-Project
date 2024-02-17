@@ -2,7 +2,7 @@ spring:
   docker:
     compose:
       enabled: true
-      file: env/compose.yaml
+      file: compose.yaml
   datasource:
     hikari:
       connection-timeout: 20000
