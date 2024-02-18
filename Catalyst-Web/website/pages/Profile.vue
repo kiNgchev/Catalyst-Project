@@ -4,8 +4,8 @@
   <br>
   <div class="container">
     <div class="profile-info">
-      <button><img src="/avatars/OpenStationDev.png" alt="" class="profile-logo"></button> <!--Change avatar button-->
-      <p>OpenStationDev</p>
+      <button class="change-avatar-button"><img src="/avatars/OpenStationDev.png" alt="" class="profile-logo"></button> <!--Change avatar button-->
+      <p>ㅤOpenStationDev</p>
     </div>
   </div>
 </div>
@@ -34,5 +34,14 @@
   width: 100px;
   border-radius: 100%;
   margin-right: 20px;
+}
+
+.change-avatar-button {
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 </style>
