@@ -4,7 +4,7 @@
   <br>
   <div class="container">
     <div class="profile-info">
-      <img src="/avatars/OpenStationDev.png" alt="" class="profile-logo">
+      <button><img src="/avatars/OpenStationDev.png" alt="" class="profile-logo"></button> <!--Change avatar button-->
       <p>OpenStationDev</p>
     </div>
   </div>
