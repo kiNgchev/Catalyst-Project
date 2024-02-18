@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.NoRepositoryBean
 
 @NoRepositoryBean
-interface UserRepositories<T : UserEntity> : JpaRepository<T, Long> {
-    fun getByUserId(id: Long): T
+interface UserRepository<T : UserEntity> : JpaRepository<T, Long> {
+    fun getByUserId(id: Long): T?
 
     fun getAllByUserId(id: Long): List<T>
 
