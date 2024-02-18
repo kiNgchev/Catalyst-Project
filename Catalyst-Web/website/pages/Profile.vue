@@ -5,6 +5,7 @@
   <div class="container">
     <div class="profile-info">
       <button class="change-avatar-button"><img src="/avatars/OpenStationDev.png" alt="" class="profile-logo"></button> <!--Change avatar button-->
+      <!--<i class='bx bxs-edit-alt'></i>-->
       <p>ㅤOpenStationDev</p>
     </div>
   </div>
@@ -45,3 +46,14 @@
   cursor: pointer;
 }
 </style>
+
+<script setup>
+useHead({
+  link: [
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    }
+  ]
+})
+</script>
