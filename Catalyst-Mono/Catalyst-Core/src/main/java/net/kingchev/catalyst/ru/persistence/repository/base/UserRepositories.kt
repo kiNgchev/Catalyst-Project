@@ -5,10 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.NoRepositoryBean
 
 @NoRepositoryBean
-interface UserRepositories : JpaRepository<UserEntity, Long> {
-    fun getByUserId(id: Long): UserEntity
+interface UserRepositories<T : UserEntity> : JpaRepository<T, Long> {
+    fun getByUserId(id: Long): T
 
-    fun getAllByUserId(id: Long): List<UserEntity>
+    fun getAllByUserId(id: Long): List<T>
 
     fun existsByUserId(id: Long): Boolean
 }
