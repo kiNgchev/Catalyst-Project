@@ -8,7 +8,7 @@
       <div class="profile-info">
         <button class="change-avatar-button"><img src="/avatars/OpenStationDev.png" alt="" class="profile-logo"></button> <!--Change avatar button-->
         <!--<i class='bx bxs-edit-alt'></i>-->
-        <p>ㅤOpenStationDev</p>
+        <p>ㅤ{{profileName}}</p>
       </div>
     </div>
   </div>
@@ -80,6 +80,8 @@
 </style>
 
 <script>
+const profileName = "OpenStationDev";
+
 export default {
   methods: {
     handleMouseLeave(event) {
