@@ -7,6 +7,7 @@
     <div class="profile-container" ref="profileContainer" @mouseleave="handleMouseLeave">
       <div class="profile-info">
         <button class="change-avatar-button" @click="changeAvatarEvent"><img :src="imageSource"  alt="" class="profile-logo"></button> <!--Change avatar button-->
+        <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
         <!--<i class='bx bxs-edit-alt'></i>-->
         <p>ㅤ{{profileName}}</p>
       </div>
@@ -99,7 +100,17 @@ export default {
       }
     },
     changeAvatarEvent() {
-     console.log("Change avatar event activated");
+      this.$refs.fileInput.click();
+    },
+    handleFileChange(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageSource = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 }
