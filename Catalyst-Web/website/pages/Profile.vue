@@ -21,6 +21,7 @@
   font-weight: 1000;
 }
 
+
 .profile-container {
   background-color: #f0f0f0;
   display: flex;
@@ -41,6 +42,7 @@
 }
 
 .profile-info p {
+  font-weight: 750;
   color: black;
 }
 
