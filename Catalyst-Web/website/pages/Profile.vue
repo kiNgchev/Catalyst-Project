@@ -6,7 +6,7 @@
     <h3 class="profile-text">Profile</h3>
     <div class="profile-container" ref="profileContainer" @mouseleave="handleMouseLeave">
       <div class="profile-info">
-        <button class="change-avatar-button"><img src="/avatars/OpenStationDev.png" alt="" class="profile-logo"></button> <!--Change avatar button-->
+        <button class="change-avatar-button" @click="changeAvatarEvent"><img :src="imageSource"  alt="" class="profile-logo"></button> <!--Change avatar button-->
         <!--<i class='bx bxs-edit-alt'></i>-->
         <p>ㅤ{{profileName}}</p>
       </div>
@@ -20,7 +20,6 @@
   color: #B0ADFF;
   font-weight: 1000;
 }
-
 
 .profile-container {
   background-color: #f0f0f0;
@@ -80,9 +79,17 @@
 </style>
 
 <script>
-const profileName = "OpenStationDev";
+const profileName = "OpenStation";
 
 export default {
+  data() {
+    return {
+      imageSource: ''
+    };
+  },
+  mounted() {
+      this.imageSource = '/avatars/OpenStationDev.png';
+  },
   methods: {
     handleMouseLeave(event) {
       if (event.clientY < 50) {
@@ -90,6 +97,9 @@ export default {
       } else {
         this.$refs.profileContainer.style.transitionDuration = '1s';
       }
+    },
+    changeAvatarEvent() {
+     console.log("Change avatar event activated");
     }
   }
 }
