@@ -18,7 +18,7 @@ abstract class BaseEntity(
     var version: Long? = null
 ) : Serializable {
     override fun toString(): String {
-        return "BaseEntity[id=$id version=$version]"
+        return "${this.javaClass.name}[id=$id version=$version]"
     }
 
     override fun equals(other: Any?): Boolean {
