@@ -21,14 +21,21 @@
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
   background-color: #141417;
 }
 
 .navbar-container {
   display: flex;
   justify-content: center;
+  transition: transform 0.3s ease;
 }
 
+
+.navbar-container:hover {
+  transform: scale(1.04);
+  transition: transform 0.3s ease;
+}
 .developers-picture {
   width: 100px;
   border-radius: 20px;
