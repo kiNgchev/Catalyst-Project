@@ -4,7 +4,7 @@
   <br>
   <div class="container">
     <h3 class="profile-text">Profile</h3>
-    <div class="profile-container">
+    <div class="profile-container" ref="profileContainer" @mouseleave="handleMouseLeave">
       <div class="profile-info">
         <button class="change-avatar-button"><img src="/avatars/OpenStationDev.png" alt="" class="profile-logo"></button> <!--Change avatar button-->
         <!--<i class='bx bxs-edit-alt'></i>-->
@@ -76,6 +76,20 @@
   cursor: pointer;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    handleMouseLeave(event) {
+      if (event.clientY < 50) {
+        this.$refs.profileContainer.style.transitionDuration = '0.1s'
+      } else {
+        this.$refs.profileContainer.style.transitionDuration = '1s';
+      }
+    }
+  }
+}
+</script>
 
 <script setup>
 useHead({

@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-container">
+  <div class="navbar-container" ref="navbarContainer" @mouseleave="handleMouseLeave">
     <div class="navbar">
       <ul>
         <li><h1 style="color: #B0ADFF;">ㅤㅤCatalyst</h1></li>
@@ -28,13 +28,13 @@ body {
 .navbar-container {
   display: flex;
   justify-content: center;
-  transition: transform 0.3s ease;
+  transition: transform 1s ease;
 }
 
 
 .navbar-container:hover {
   transform: scale(1.04);
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 .developers-picture {
   width: 100px;
@@ -110,3 +110,17 @@ li h1 {
   background: none;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    handleMouseLeave(event) {
+      if (event.clientY < 50) {
+        this.$refs.navbarContainer.style.transitionDuration = '1s';
+      } else {
+        this.$refs.navbarContainer.style.transitionDuration = '2s';
+      }
+    }
+  }
+}
+</script>
