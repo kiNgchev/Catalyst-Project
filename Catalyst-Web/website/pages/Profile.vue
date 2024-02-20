@@ -9,14 +9,26 @@
         <button class="change-avatar-button" @click="changeAvatarEvent"><img :src="imageSource"  alt="" class="profile-logo"></button> <!--Change avatar button-->
         <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
         <!--<i class='bx bxs-edit-alt'></i>-->
-        <p>ㅤ{{profileName}}</p>
-      </div>
+        <button class="change-username-button" @click="changeUsernameEvent"><p>ㅤ{{profileName}}</p></button>
+        <input type="text" ref="usernameInput" style="display: block" placeholder="Enter username" class="usernameInputField" @change="handleUsernameInputChange">
+        </div> <!--TODO: Make <input> and TS Code-->
     </div>
-  </div>
+  </div> 
 </div>
 </template>
 
 <style>
+.usernameInputField {
+ border: none;
+}
+
+.change-username-button {
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 .profile-text {
   color: #B0ADFF;
   font-weight: 1000;
@@ -80,12 +92,11 @@
 </style>
 
 <script>
-const profileName = "OpenStation";
-
 export default {
   data() {
     return {
-      imageSource: ''
+      imageSource: '',
+      profileName: 'OpenStationDev'
     };
   },
   mounted() {
@@ -101,6 +112,9 @@ export default {
     },
     changeAvatarEvent() {
       this.$refs.fileInput.click();
+    },
+    changeUsernameEvent(){
+      
     },
     handleFileChange(event) {
       const file = event.target.files[0];
