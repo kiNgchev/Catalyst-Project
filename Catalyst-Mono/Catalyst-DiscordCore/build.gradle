@@ -1,0 +1,17 @@
+description = "Catalyst Bot Discd Core Module"
+
+ext {
+    moduleName = 'Catalyst-DiscordCore'
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    api project(":Catalyst-Core")
+}
