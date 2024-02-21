@@ -1,6 +1,0 @@
-{
-  "props": {
-    "active": "Determines whether the messages are visible or not.",
-    "message": "Display a single message."
-  }
-}

@@ -1,5 +1,0 @@
-{
-  "props": {
-    "transition": "Sets the component transition. Can be one of the [built in](/styles/transitions/) or custom transition."
-  }
-}

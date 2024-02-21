@@ -1,8 +1,0 @@
-{
-  "props": {
-    "itemHeight": "Height in pixels of each item to display."
-  },
-  "exposed": {
-    "scrollToIndex": "Scrolls to the item at a given index."
-  }
-}
