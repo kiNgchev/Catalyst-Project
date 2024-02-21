@@ -1,2 +1,0 @@
-org.springframework.aot.generate.ValueCodeGenerator$Delegate=\
-org.springframework.beans.testfixture.beans.factory.aot.CustomPropertyValue$ValueCodeGeneratorDelegate
