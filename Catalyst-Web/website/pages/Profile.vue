@@ -29,11 +29,11 @@
 }
 
 .usernameInputField {
- border: none;
- border-radius: 5px;
- font-weight: 500;
- height: 35px;
- font-size: 1rem;
+  border-radius: 5px;
+  background: none;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 35px;
 }
 
 .change-username-button {
