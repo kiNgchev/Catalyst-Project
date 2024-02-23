@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isClosed" class="cookie-banner">
-    <p>The website using cookie 🍪</p>
+    <p>This site uses cookies 🍪</p>
     <button @click="closeBanner">Accept</button>
   </div>
 </template>
