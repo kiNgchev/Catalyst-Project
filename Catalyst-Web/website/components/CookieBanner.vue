@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isClosed" class="cookie-banner">
-    <p>This site uses cookies 🍪</p>
+    <p>This site uses cookies 🍪</p>ㅤㅤ
     <button @click="closeBanner">Accept</button>
   </div>
 </template>
@@ -53,8 +53,9 @@ export default {
   color: white;
   border-radius: 10px;
   width: 130px;
-  height: 70px;
+  height: 60px;
   font-size: 1.35rem;
-  font-weight: 600
+  font-weight: 600;
+  cursor: pointer;
 }
 </style>
