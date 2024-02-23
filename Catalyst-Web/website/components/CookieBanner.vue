@@ -55,7 +55,7 @@ export default {
   width: 130px;
   height: 60px;
   font-size: 1.35rem;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
 }
 </style>
