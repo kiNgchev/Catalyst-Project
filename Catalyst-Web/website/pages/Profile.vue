@@ -9,9 +9,9 @@
         <button class="change-avatar-button" @click="changeAvatarEvent"><img :src="imageSource"  alt="" class="profile-logo"></button> <!--Change avatar button-->
         <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
         <!--<i class='bx bxs-edit-alt'></i>-->
-        <button style="display: block" class="change-username-button" @click="changeUsernameEvent"><p>ㅤ{{profileName}}</p></button>
-        <input type="text" ref="usernameInput" style="display: none" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
-        <button class="usernameInputButton" style="display: none" @click="changeUsernameEventButton">Change</button>
+        <button style="display: block" class="change-username-button" @click="changeUsernameEvent" v-if="usernameVisible"><p>ㅤ{{profileName}}</p></button>
+        ㅤ<input type="text" v-model="usernameInputData"  v-if="usernameInputFieldVisible" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
+        ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButton">Change</button>
         </div>
     </div>
   </div>
@@ -25,6 +25,7 @@
   background: none;
   font-size: 1rem;
   font-weight: 600;
+  height: 35px;
 }
 
 .usernameInputField {
@@ -109,7 +110,11 @@ export default {
   data() {
     return {
       imageSource: '',
-      profileName: 'OpenStationDev'
+      profileName: 'OpenStationDev',
+      usernameVisible: true,
+      usernameInputButtonVisible: false,
+      usernameInputFieldVisible: false,
+      usernameInputData: '',
     };
   },
   mounted() {
@@ -126,10 +131,19 @@ export default {
     changeAvatarEvent() {
       this.$refs.fileInput.click();
     },
-    changeUsernameEvent(){
-
-    },
-    changeUsernameEventButton() {},
+changeUsernameEvent() {
+  this.usernameVisible = false;
+  this.usernameInputButtonVisible = true;
+  this.usernameInputFieldVisible = true;
+},
+changeUsernameEventButton() {
+  if (this.usernameInputData.length < 3) {} else {
+    this.profileName = this.usernameInputData;
+    this.usernameVisible = true;
+    this.usernameInputButtonVisible = false;
+    this.usernameInputFieldVisible = false;
+  }
+},
     handleFileChange(event) {
       const file = event.target.files[0];
       if (!file) return;
