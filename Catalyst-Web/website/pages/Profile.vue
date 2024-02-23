@@ -11,6 +11,7 @@
         <!--<i class='bx bxs-edit-alt'></i>-->
         <button style="display: block" class="change-username-button" @click="changeUsernameEvent"><p>ㅤ{{profileName}}</p></button>
         <input type="text" ref="usernameInput" style="display: none" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
+        <button class="usernameInputButton" style="display: none" @click="changeUsernameEventButton">Change</button>
         </div>
     </div>
   </div>
@@ -18,6 +19,14 @@
 </template>
 
 <style>
+.usernameInputButton {
+  border-radius: 5px;
+  cursor: pointer;
+  background: none;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 .usernameInputField {
  border: none;
  border-radius: 5px;
@@ -120,6 +129,7 @@ export default {
     changeUsernameEvent(){
 
     },
+    changeUsernameEventButton() {},
     handleFileChange(event) {
       const file = event.target.files[0];
       if (!file) return;
