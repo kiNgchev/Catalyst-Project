@@ -118,7 +118,11 @@ export default {
     };
   },
   mounted() {
-      this.profileName = useCookie('fhsu982897829873987ruj381936j1gs8198').value;
+      const tempUsernameFromCookie = useCookie('fhsu982897829873987ruj381936j1gs8198').value;
+      if (tempUsernameFromCookie.length < 3) {} else {
+        this.profileName = tempUsernameFromCookie;
+      }
+
       this.imageSource = '/avatars/OpenStationDev.png';
   },
   methods: {
