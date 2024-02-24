@@ -122,7 +122,7 @@ export default {
   data() {
     return {
       imageSource: '',
-      profileName: '',
+      profileName: 'Anonymous',
       usernameVisible: true,
       usernameInputButtonVisible: false,
       usernameInputFieldVisible: false,
@@ -131,7 +131,7 @@ export default {
   },
   mounted() {
       const tempUsernameFromCookie = useCookie('fhsu982897829873987ruj381936j1gs8198').value;
-      if (tempUsernameFromCookie.length < 3) {} else {
+      if (typeof tempUsernameFromCookie === 'string' && tempUsernameFromCookie.length >= 3) {
         this.profileName = tempUsernameFromCookie;
       }
 
