@@ -11,9 +11,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @Configuration
-@Import(
-        RabbitMQConfiguration.class
-)
+@Import({
+        RabbitMQConfiguration.class,
+        MBeanConfiguration.class
+})
 @EnableConfigurationProperties
 @EnableJpaRepositories
 @EnableRedisRepositories
