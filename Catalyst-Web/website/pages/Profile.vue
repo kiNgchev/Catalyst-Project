@@ -105,6 +105,17 @@
 }
 </style>
 
+<script setup>
+useHead({
+  link: [
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    }
+  ]
+})
+</script>
+
 <script>
 export default {
   data() {
@@ -162,15 +173,4 @@ changeUsernameEventButton() {
     }
   }
 }
-</script>
-
-<script setup>
-useHead({
-  link: [
-    {
-      rel: "stylesheet",
-      href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-    }
-  ]
-})
 </script>
