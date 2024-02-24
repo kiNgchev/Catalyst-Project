@@ -118,6 +118,7 @@ export default {
     };
   },
   mounted() {
+      this.profileName = useCookie('fhsu982897829873987ruj381936j1gs8198').value;
       this.imageSource = '/avatars/OpenStationDev.png';
   },
   methods: {
@@ -138,6 +139,7 @@ changeUsernameEvent() {
 },
 changeUsernameEventButton() {
   if (this.usernameInputData.length < 3) {} else {
+    useCookie('fhsu982897829873987ruj381936j1gs8198').value = this.usernameInputData;
     this.profileName = this.usernameInputData;
     this.usernameVisible = true;
     this.usernameInputButtonVisible = false;
