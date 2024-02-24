@@ -12,6 +12,7 @@
         <button style="display: block" class="change-username-button" @click="changeUsernameEvent" v-if="usernameVisible"><p>ㅤ{{profileName}}</p></button>
         ㅤ<input type="text" v-model="usernameInputData"  v-if="usernameInputFieldVisible" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
         ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButton">Change</button>
+        ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButtonUndo">X</button>
         </div>
     </div>
   </div>
@@ -160,6 +161,11 @@ changeUsernameEventButton() {
     this.usernameInputButtonVisible = false;
     this.usernameInputFieldVisible = false;
   }
+},
+changeUsernameEventButtonUndo() {
+  this.usernameVisible = true;
+  this.usernameInputButtonVisible = false;
+  this.usernameInputFieldVisible = false;
 },
     handleFileChange(event) {
       const file = event.target.files[0];
