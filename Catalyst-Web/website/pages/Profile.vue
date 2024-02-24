@@ -9,8 +9,9 @@
         <button class="change-avatar-button" @click="changeAvatarEvent"><img :src="imageSource"  alt="" class="profile-logo"></button> <!--Change avatar button-->
         <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
         <!--<i class='bx bxs-edit-alt'></i>-->
-        <button style="display: block" class="change-username-button" @click="changeUsernameEvent"><p>ㅤ{{profileName}}</p></button>
-        <input type="text" ref="usernameInput" style="display: none" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
+        <button style="display: block" class="change-username-button" @click="changeUsernameEvent" v-if="usernameVisible"><p>ㅤ{{profileName}}</p></button>
+        ㅤ<input type="text" v-model="usernameInputData"  v-if="usernameInputFieldVisible" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
+        ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButton">Change</button>
         </div>
     </div>
   </div>
@@ -18,12 +19,21 @@
 </template>
 
 <style>
+.usernameInputButton {
+  border-radius: 5px;
+  cursor: pointer;
+  background: none;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 35px;
+}
+
 .usernameInputField {
- border: none;
- border-radius: 5px;
- font-weight: 500;
- height: 35px;
- font-size: 1rem;
+  border-radius: 5px;
+  background: none;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 35px;
 }
 
 .change-username-button {
@@ -100,10 +110,19 @@ export default {
   data() {
     return {
       imageSource: '',
-      profileName: 'OpenStationDev'
+      profileName: '',
+      usernameVisible: true,
+      usernameInputButtonVisible: false,
+      usernameInputFieldVisible: false,
+      usernameInputData: '',
     };
   },
   mounted() {
+      const tempUsernameFromCookie = useCookie('fhsu982897829873987ruj381936j1gs8198').value;
+      if (tempUsernameFromCookie.length < 3) {} else {
+        this.profileName = tempUsernameFromCookie;
+      }
+
       this.imageSource = '/avatars/OpenStationDev.png';
   },
   methods: {
@@ -117,9 +136,20 @@ export default {
     changeAvatarEvent() {
       this.$refs.fileInput.click();
     },
-    changeUsernameEvent(){
-
-    },
+changeUsernameEvent() {
+  this.usernameVisible = false;
+  this.usernameInputButtonVisible = true;
+  this.usernameInputFieldVisible = true;
+},
+changeUsernameEventButton() {
+  if (this.usernameInputData.length < 3) {} else {
+    useCookie('fhsu982897829873987ruj381936j1gs8198').value = this.usernameInputData;
+    this.profileName = this.usernameInputData;
+    this.usernameVisible = true;
+    this.usernameInputButtonVisible = false;
+    this.usernameInputFieldVisible = false;
+  }
+},
     handleFileChange(event) {
       const file = event.target.files[0];
       if (!file) return;
