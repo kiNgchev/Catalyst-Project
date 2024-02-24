@@ -39,7 +39,7 @@ public class CommonProperties {
     @ToString
     public static class Discord {
         private String defaultPrefix = "c.";
-        private String defaultAccentColor = "#FFA550";
+        private String defaultAccentColor = "#7567ff";
         private List<Long> superUserId = List.of(743878110747033691L, 745291286420127895L);
     }
 

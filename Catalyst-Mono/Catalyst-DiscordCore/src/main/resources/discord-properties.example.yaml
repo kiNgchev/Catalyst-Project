@@ -1,0 +1,7 @@
+discord:
+  prod: false
+  playingStatus: "Your status"
+  test:
+    token: "test"
+  production:
+    token: "prod"
