@@ -110,7 +110,7 @@ export default {
   data() {
     return {
       imageSource: '',
-      profileName: 'OpenStationDev',
+      profileName: '',
       usernameVisible: true,
       usernameInputButtonVisible: false,
       usernameInputFieldVisible: false,
