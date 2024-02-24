@@ -39,15 +39,11 @@ object CommonUtils {
 
     private val SECONDS_FORMAT: DateTimeFormatter = DateTimeFormat.forPattern("ss").withZone(DateTimeZone.UTC)
 
-    private val VK_LINK_TAG: Pattern = Pattern.compile("\\[([0-9a-zA-Z_\\.]+)\\|([^\\|\\[\\]]+)\\]")
+    private val VK_LINK_TAG: Pattern = Pattern.compile("\\[([0-9a-zA-Z_.]+)\\|([^|\\[\\]]+)]")
 
     private val VK_HASH_TAG: Pattern = Pattern.compile("(#[0-9a-zA-Zа-яА-Я_#@]+)")
 
     private val CODE_PATTERN: Pattern = Pattern.compile("\\s*```(groovy\\s+)?((.|\\n)+)```\\s*", Pattern.MULTILINE)
-
-    private fun CommonUtils() {
-        // helper class
-    }
 
     @JvmStatic
     fun createRequestFactory(): HttpComponentsClientHttpRequestFactory {
@@ -122,7 +118,7 @@ object CommonUtils {
     }
 
     @JvmStatic
-    fun mdLink(title: String?, url: String?): String {
+    fun mdLink(title: String, url: String): String {
         return String.format("[%s](%s)", if (StringUtils.isEmpty(title)) url else title, url)
     }
 
@@ -139,7 +135,7 @@ object CommonUtils {
     }
 
     @JvmStatic
-    fun parseMillis(string: String): Long? {
+    fun parseMillis(string: String): Long {
         if (StringUtils.isNotEmpty(string)) {
             if (string.matches("^[0-2]?[0-3]:[0-5][0-9]:[0-5][0-9]$".toRegex())) {
                 return HOURS_FORMAT.parseMillis(string)
@@ -149,7 +145,7 @@ object CommonUtils {
                 return SECONDS_FORMAT.parseMillis(string)
             }
         }
-        return null
+        return -1
     }
 
     @JvmStatic
@@ -191,7 +187,7 @@ object CommonUtils {
     }
 
     @JvmStatic
-    fun makeLink(title: String?, url: String?): String {
+    fun makeLink(title: String, url: String): String {
         return String.format("[%s](%s)", title, url)
     }
 
@@ -213,10 +209,10 @@ object CommonUtils {
     }
 
     @JvmStatic
-    fun <T> reverse(collection: List<T?>?, part: Collection<T?>?): List<T?> {
-        val arrayList: MutableList<T?> = ArrayList(collection)
+    fun <T> reverse(collection: List<T>, part: Collection<T>): List<T> {
+        val arrayList: MutableList<T> = ArrayList(collection)
         if (CollectionUtils.isNotEmpty(part)) {
-            arrayList.removeAll(part!!)
+            arrayList.removeAll(part)
         }
         return arrayList
     }
@@ -239,22 +235,22 @@ object CommonUtils {
     }
 
     @JvmStatic
-    fun <T : Enum<T>?> safeEnumSet(collection: Collection<*>, type: Class<T>): Set<T> {
+    fun <T : Enum<T>> safeEnumSet(collection: Collection<*>, type: Class<T>): Set<T> {
         return Stream.of(*type.enumConstants)
-            .filter { e: T -> collection.contains(e!!.name) }
+            .filter { e: T -> collection.contains(e.name) }
             .collect(Collectors.toSet())
     }
 
     @JvmStatic
-    fun <T : Enum<T>?> safeEnumSet(input: String, type: Class<T>): Set<T> {
+    fun <T : Enum<T>> safeEnumSet(input: String, type: Class<T>): Set<T> {
         return if (StringUtils.isNotEmpty(input)) safeEnumSet(
-            Arrays.asList(
+            listOf(
                 *input.split(",".toRegex()).dropLastWhile { it.isEmpty() }
                     .toTypedArray()), type) else HashSet()
     }
 
     @JvmStatic
-    fun <T : Enum<T>?> enumsString(enums: Set<T?>): String? {
+    fun <T : Enum<T>> enumsString(enums: Set<T>): String? {
         return if (CollectionUtils.isNotEmpty(enums)) enums.stream().map { obj: T? -> obj!!.name }
             .collect(Collectors.joining(",")) else null
     }
@@ -270,7 +266,7 @@ object CommonUtils {
     }
 
     @JvmStatic
-    fun urlEncode(value: String?): String {
+    fun urlEncode(value: String): String {
         return URLEncoder.encode(value, StandardCharsets.UTF_8)
     }
 }
