@@ -12,6 +12,7 @@
         <button style="display: block" class="change-username-button" @click="changeUsernameEvent" v-if="usernameVisible"><p>ㅤ{{profileName}}</p></button>
         ㅤ<input type="text" v-model="usernameInputData"  v-if="usernameInputFieldVisible" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
         ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButton">Change</button>
+        ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButtonUndo">X</button>
         </div>
     </div>
   </div>
@@ -105,12 +106,23 @@
 }
 </style>
 
+<script setup>
+useHead({
+  link: [
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    }
+  ]
+})
+</script>
+
 <script>
 export default {
   data() {
     return {
       imageSource: '',
-      profileName: '',
+      profileName: 'Anonymous',
       usernameVisible: true,
       usernameInputButtonVisible: false,
       usernameInputFieldVisible: false,
@@ -119,7 +131,7 @@ export default {
   },
   mounted() {
       const tempUsernameFromCookie = useCookie('fhsu982897829873987ruj381936j1gs8198').value;
-      if (tempUsernameFromCookie.length < 3) {} else {
+      if (typeof tempUsernameFromCookie === 'string' && tempUsernameFromCookie.length >= 3) {
         this.profileName = tempUsernameFromCookie;
       }
 
@@ -150,6 +162,11 @@ changeUsernameEventButton() {
     this.usernameInputFieldVisible = false;
   }
 },
+changeUsernameEventButtonUndo() {
+  this.usernameVisible = true;
+  this.usernameInputButtonVisible = false;
+  this.usernameInputFieldVisible = false;
+},
     handleFileChange(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -162,15 +179,4 @@ changeUsernameEventButton() {
     }
   }
 }
-</script>
-
-<script setup>
-useHead({
-  link: [
-    {
-      rel: "stylesheet",
-      href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-    }
-  ]
-})
 </script>
