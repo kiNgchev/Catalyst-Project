@@ -82,6 +82,7 @@ subprojects {
         //Dev dependencies
         developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
         //Compile only
+        compileOnly 'joda-time:joda-time:2.12.7'
         compileOnly 'org.projectlombok:lombok'
         //runtime only
         runtimeOnly 'org.postgresql:postgresql'
