@@ -18,25 +18,25 @@ class CommandConfigServiceImpl : CommandConfigService {
 
     @Transactional(readOnly = true)
     @CachePut(value = ["command_config"], key = "#guildId")
-    fun findAll(guildId: Long): List<CommandConfig> {
+    override fun findAll(guildId: Long): List<CommandConfig> {
         return repository.getAllByGuildId(guildId)
     }
 
     @Transactional(readOnly = true)
     @CachePut(value = ["command_config"], key = "#{key + ' ' + guildId}")
-    fun findByKey(guildId: Long, key: String): CommandConfig? {
+    override fun findByKey(guildId: Long, key: String): CommandConfig? {
         return repository.getByKey(guildId, key)
     }
 
     @Transactional
     @CacheEvict(value = ["command_config"])
-    fun save(config: CommandConfig): CommandConfig {
+    override fun save(config: CommandConfig): CommandConfig {
         return repository.save(config)
     }
 
     @Transactional
     @CacheEvict(value = ["command_config"])
-    fun save(configs: Iterable<CommandConfig>): Iterable<CommandConfig> {
+    override fun save(configs: Iterable<CommandConfig>): Iterable<CommandConfig> {
         return repository.saveAll(configs)
     }
 }
