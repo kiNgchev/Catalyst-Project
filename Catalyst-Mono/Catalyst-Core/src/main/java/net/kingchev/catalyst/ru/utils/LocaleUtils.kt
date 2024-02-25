@@ -6,7 +6,7 @@ object LocaleUtils {
     const val DEFAULT_LOCALE: String = "en"
     const val RU_LOCALE: String = "ru"
 
-    private var SUPPORTED_LOCALES: Map<String, Locale>
+    var SUPPORTED_LOCALES: Map<String, Locale>
 
     init {
         val localeMap: MutableMap<String, Locale> = HashMap()

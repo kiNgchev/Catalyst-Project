@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Slf4j
 @EnableCaching
-abstract class AbstractGuildServiceImpl<T : GuildEntity, R : GuildRepository<T>> protected constructor(
-    protected val repository: R,
+abstract class AbstractGuildServiceImpl<T : GuildEntity, R : GuildRepository<T>>(
+    protected var repository: R
 ) : GuildService<T> {
     private val `$lock`: Any = arrayOfNulls<Any>(0)
 
