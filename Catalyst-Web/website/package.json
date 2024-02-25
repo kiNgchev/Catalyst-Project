@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "nuxt": "^3.10.1",
+    "unirest": "^0.6.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   }
