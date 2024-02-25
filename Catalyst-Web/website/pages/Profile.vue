@@ -17,14 +17,30 @@
     </div>
     <br><br><br>
     <h3 class="profile-text">STATISTICS</h3>
-    <div class="profile-container">
-      <h3 class="">SESSIONS:ㅤ{{ sessions_count }}</h3>
+    <div class="stat-container">
+      <h1 class="stat-count">{{ sessions_count }}</h1>
+      <h5 class="stat-text">Sessions</h5>
     </div>
   </div>
 </div>
 </template>
 
 <style>
+.stat-container {
+  background-color:#17171A;
+  height: 160px;
+}
+
+.stat-count {
+  font-size: 60px;
+  color: white;
+}
+
+.stat-text {
+  font-size: 20px;
+  color: #ADB0B8;
+}
+
 .usernameInputButton {
   border-radius: 5px;
   cursor: pointer;
