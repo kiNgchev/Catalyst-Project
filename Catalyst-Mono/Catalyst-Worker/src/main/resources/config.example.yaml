@@ -1,5 +1,0 @@
-bot:
-  test:
-    token: "test_token"
-  production:
-    token: "prod_token"
