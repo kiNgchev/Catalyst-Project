@@ -6,6 +6,7 @@ object LocaleUtils {
     const val DEFAULT_LOCALE: String = "en"
     const val RU_LOCALE: String = "ru"
 
+    @JvmStatic
     var SUPPORTED_LOCALES: Map<String, Locale>
 
     init {
@@ -20,6 +21,9 @@ object LocaleUtils {
 
     @JvmStatic
     fun getOrDefault(tag: String): Locale = SUPPORTED_LOCALES.getOrDefault(tag, get(DEFAULT_LOCALE)!!)
+
+    @JvmStatic
+    fun getDefaultLocale(): Locale = SUPPORTED_LOCALES[DEFAULT_LOCALE]!!
 
     @JvmStatic
     fun isSupported(tag: String): Boolean = SUPPORTED_LOCALES.containsKey(tag)
