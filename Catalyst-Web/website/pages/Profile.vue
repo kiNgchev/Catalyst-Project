@@ -18,6 +18,7 @@
     <br><br><br>
     <h3 class="profile-text">STATISTICS</h3>
     <div class="profile-container">
+      <h3 class="">SESSIONS:ㅤ{{ sessions_count }}</h3>
     </div>
   </div>
 </div>
@@ -125,6 +126,7 @@ useHead({
 export default {
   data() {
     return {
+      sessions_count: useCookie('sessions').value,
       imageSource: '',
       profileName: 'Anonymous',
       usernameVisible: true,
