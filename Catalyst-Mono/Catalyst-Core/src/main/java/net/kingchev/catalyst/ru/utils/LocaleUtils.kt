@@ -22,5 +22,8 @@ object LocaleUtils {
     fun getOrDefault(tag: String): Locale = SUPPORTED_LOCALES.getOrDefault(tag, get(DEFAULT_LOCALE)!!)
 
     @JvmStatic
+    fun getDefaultLocale(): Locale = SUPPORTED_LOCALES[DEFAULT_LOCALE]!!
+
+    @JvmStatic
     fun isSupported(tag: String): Boolean = SUPPORTED_LOCALES.containsKey(tag)
 }
