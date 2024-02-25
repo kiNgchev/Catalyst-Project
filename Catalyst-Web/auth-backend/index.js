@@ -21,7 +21,7 @@ const server = http.createServer((req, res) => {
       };
 
       unirest
-        .post("https://discord.com/api/oauth/token")
+        .post("https://discord.com/api/oauth2/token")
         .send(requestPayload)
         .headers({
           "Content-Type": "application/x-www-form-urlencoded",
