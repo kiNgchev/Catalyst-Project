@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     ext {
-        kotlinVersion       = '1.9.22'
+        kotlinVersion       = '1.8.20'
         kotlinExtVersion    = '2.0.0-Beta2'
         springBootVersion   = '3.2.2'
         hibernateVersion    = '6.4.1.Final'
@@ -49,6 +49,7 @@ subprojects {
 
     java {
         sourceCompatibility = '21'
+        targetCompatibility = '21'
     }
 
     configurations {
