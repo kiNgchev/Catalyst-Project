@@ -3,7 +3,7 @@
   <Navbar/>
   <br>
   <div class="container">
-    <h3 class="profile-text">Profile</h3>
+    <h3 class="profile-text">PROFILE</h3>
     <div class="profile-container" ref="profileContainer" @mouseleave="handleMouseLeave">
       <div class="profile-info">
         <button class="change-avatar-button" @click="changeAvatarEvent"><img :src="imageSource"  alt="" class="profile-logo"></button> <!--Change avatar button-->
@@ -14,6 +14,10 @@
         ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButton">Change</button>
         ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButtonUndo">X</button>
         </div>
+    </div>
+    <br><br><br>
+    <h3 class="profile-text">STATISTICS</h3>
+    <div class="profile-container">
     </div>
   </div>
 </div>
@@ -46,7 +50,7 @@
 
 .profile-text {
   color: #B0ADFF;
-  font-weight: 1000;
+  font-weight: 800;
 }
 
 .profile-container {

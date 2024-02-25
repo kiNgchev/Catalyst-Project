@@ -2,7 +2,7 @@
   <div class="">
   <Navbar/>
   <div class="" v-if="auth">
-
+    <div class="sidebar"></div>
   </div>
   <div class="else-view" v-else>
     <h1>Please. Login first!ㅤㅤㅤ</h1>

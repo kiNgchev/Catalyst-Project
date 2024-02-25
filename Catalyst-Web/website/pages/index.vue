@@ -26,6 +26,7 @@
                 ㅤㅤㅤ<h1>/list</h1>
                 ㅤㅤㅤ<h1>/dashboard</h1>
                 ㅤㅤㅤ<h1>/donate</h1>
+                ㅤㅤㅤ<h1>/balance</h1>
                 ㅤㅤㅤ<h1>Coming Soon...</h1>
               </div>
             </marquee>
@@ -114,7 +115,7 @@ body {
 
 .developers-container h3,
 .view-our-commands {
-  font-weight: 1000;
+  font-weight: 800;
   color: #B0ADFF;
 }
 
