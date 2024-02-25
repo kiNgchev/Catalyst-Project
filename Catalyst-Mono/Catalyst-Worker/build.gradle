@@ -9,11 +9,11 @@ ext {
 }
 
 application {
-    mainClassName = 'net.kingchev.catalyst.ru.Launcher'
+    mainClassName = 'net.kingchev.catalyst.ru.worker.Launcher'
 }
 
 bootJar {
-    mainClass = 'net.kingchev.catalyst.ru.Launcher'
+    mainClass = 'net.kingchev.catalyst.ru.worker.Launcher'
 }
 
 dependencies {
