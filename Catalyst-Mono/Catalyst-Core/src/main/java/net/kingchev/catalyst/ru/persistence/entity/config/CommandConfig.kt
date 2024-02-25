@@ -5,7 +5,7 @@ import net.kingchev.catalyst.ru.model.CoolDownMode
 import net.kingchev.catalyst.ru.persistence.entity.base.GuildEntity
 
 @Entity
-@Table("command_config")
+@Table(name = "command_config")
 data class CommandConfig(
     @Column
     var key: String? = null,
