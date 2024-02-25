@@ -32,7 +32,7 @@
 }
 
 .stat-count {
-  font-size: 60px;
+  font-size: 55px;
   color: white;
 }
 
