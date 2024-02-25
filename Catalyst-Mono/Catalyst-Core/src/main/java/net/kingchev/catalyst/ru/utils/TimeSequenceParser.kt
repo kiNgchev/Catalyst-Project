@@ -85,7 +85,7 @@ object TimeSequenceParser {
         val currentDate = Date()
         val calendar = Calendar.getInstance()
         calendar.time = currentDate
-        values.forEach { (type: FieldType, units: Int?) ->
+        values.forEach { (type: FieldType, units: Int) ->
             calendar.add(
                 type.type,
                 (units)
