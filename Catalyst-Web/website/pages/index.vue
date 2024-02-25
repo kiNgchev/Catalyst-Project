@@ -69,12 +69,14 @@ export default {
 </script>
 
 <style>
+
 .view-our-commands {
   text-align: center;
 }
 
 .commands-pre-container {
   background: #17171A;
+  color: white;
 }
 
 .pre-command-container {
