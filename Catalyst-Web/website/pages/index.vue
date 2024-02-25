@@ -1,6 +1,36 @@
 <template>
   <div class="" v-if="loaded">
     <Navbar/>
+    <br/>
+    <h3 class="view-our-commands">VIEW OUR COMMANDS</h3>
+      <div class="commands-pre-container">
+            <marquee behavior="" direction="" scrollamount="20">
+              <div class="pre-command-container">
+                ㅤㅤㅤ<h1>/kick</h1>
+                ㅤㅤㅤ<h1>/ban</h1>
+                ㅤㅤㅤ<h1>/userinfo</h1>
+                ㅤㅤㅤ<h1>/mute</h1>
+                ㅤㅤㅤ<h1>/lock</h1>
+                ㅤㅤㅤ<h1>/purge</h1>
+                ㅤㅤㅤ<h1>/report</h1>
+                ㅤㅤㅤ<h1>/warn</h1>
+                ㅤㅤㅤ<h1>/warns</h1>
+                ㅤㅤㅤ<h1>/avatar</h1>
+                ㅤㅤㅤ<h1>/guildinfo</h1>
+                ㅤㅤㅤ<h1>/channelinfo</h1>
+                ㅤㅤㅤ<h1>/emojis</h1>
+                ㅤㅤㅤ<h1>/roles</h1>
+                ㅤㅤㅤ<h1>/ping</h1>
+                ㅤㅤㅤ<h1>/config</h1>
+                ㅤㅤㅤ<h1>/permissions</h1>
+                ㅤㅤㅤ<h1>/list</h1>
+                ㅤㅤㅤ<h1>/dashboard</h1>
+                ㅤㅤㅤ<h1>/donate</h1>
+                ㅤㅤㅤ<h1>Coming Soon...</h1>
+              </div>
+            </marquee>
+      </div>
+      <br/><br><br>
     <div class="content-container">
       <div class="developers-container">
         <h3>TEAM</h3>
@@ -39,6 +69,18 @@ export default {
 </script>
 
 <style>
+.view-our-commands {
+  text-align: center;
+}
+
+.commands-pre-container {
+  background: #17171A;
+}
+
+.pre-command-container {
+  display: flex;
+}
+
 .de-container {
   display: flex;
   justify-content: center;
@@ -68,7 +110,8 @@ body {
   height: 100px;
 }
 
-.developers-container h3 {
+.developers-container h3,
+.view-our-commands {
   font-weight: 1000;
   color: #B0ADFF;
 }
