@@ -13,7 +13,7 @@ import java.util.*;
 
 @Data
 @Component
-@ConfigurationProperties("core")
+@ConfigurationProperties("discord-core")
 @PropertySource("classpath:discord-properties.yaml")
 public class WorkerProperties {
     private Discord discord = new Discord();
