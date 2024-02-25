@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import
 
 @SpringBootApplication
 @Import(
-    CommonConfiguration::class
+    CommonConfiguration::class,
 )
 class CatalystWorker
 
