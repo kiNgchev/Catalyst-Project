@@ -18,16 +18,26 @@
     <br><br><br>
     <h3 class="profile-text">STATISTICS</h3>
     <div class="stat-container">
-      <h1 class="stat-count">{{ sessions_count }}</h1>
-      <h5 class="stat-text">Sessions</h5>
+      <div class="stat-item-container">
+        <h1 class="stat-count">{{ sessions_count }}</h1>
+        <h5 class="stat-text">Sessions</h5>
+      </div>
     </div>
   </div>
 </div>
 </template>
 
 <style>
+.stat-item-container {
+  display: block;
+}
+
 .stat-container {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   background-color:#17171A;
+  display: flex;
   height: 160px;
 }
 
