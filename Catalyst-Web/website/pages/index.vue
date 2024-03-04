@@ -36,16 +36,39 @@
       <div class="developers-container">
         <h3>TEAM</h3>
         <h1>Developers of project</h1>
-        <br><img src="/avatars/OpenStationDev.png" alt="OpenStation" class="developers-picture">
-        <h2>OpenStation(KYBEX11) - Owner, Frontend, Backend Developer</h2>
-        <img src="/avatars/kiNgchev.gif" alt="kiNgchev" class="developers-picture">
-        <h2>kiNgchev - Owner, Backend Developer</h2>
+        <div class="developer-profile-container">
+          <br><img src="/avatars/OpenStationDev.png" alt="OpenStation" class="developers-picture">
+          <br>
+          <h2>ㅤㅤOpenStation(KYBEX11)ㅤ</h2><p>- Owner, Frontend, Backend Developer</p>
+        </div>
+        <br>
+        <div class="developer-profile-container">
+          <img src="/avatars/kiNgchev.gif" alt="kiNgchev" class="developers-picture">
+          <h2>ㅤㅤkiNgchev(KINGCHEV)ㅤ</h2><p>- Founder, Owner, Backend Developer</p>
+        </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <style>
+.developer-profile-container p {
+  font-size: 1.2rem;
+  color: gray;
+  font-weight: 800;
+}
+
+.developer-profile-container img {
+  margin-right: 10px;
+}
+
+.developer-profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
 .view-our-commands {
   text-align: center;
@@ -78,7 +101,7 @@ body {
 
 .developers-picture {
   width: 100px;
-  border-radius: 20px;
+  border-radius: 50%;
   height: 100px;
 }
 
