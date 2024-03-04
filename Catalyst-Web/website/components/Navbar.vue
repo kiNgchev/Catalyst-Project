@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-container" ref="navbarContainer" @mouseleave="handleMouseLeave">
-    <div class="navbar">
+    <div class="navbar-flight">
       <ul>
         <li><h1 style="color: #B0ADFF;">ㅤㅤCatalyst</h1></li>
         <li><button @click="navigateTo('/')">Home</button></li>
@@ -55,8 +55,8 @@ body {
   text-align: center;
 }
 
-.navbar {
-  box-shadow: 0 0 5px white;
+.navbar-flight {
+  border: 1.5px solid white;
   width: 90%;
   height: 50px;
   border-radius: 8px;
