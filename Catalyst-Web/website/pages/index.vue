@@ -39,12 +39,17 @@
         <div class="developer-profile-container">
           <br><img src="/avatars/OpenStationDev.png" alt="OpenStation" class="developers-picture">
           <br>
-          <h2>ㅤㅤOpenStation(KYBEX11)ㅤ</h2><p>- Owner, Frontend, Backend Developer</p>
+          <h2>ㅤㅤOpenStation(KYBEX11)ㅤ</h2><p>- Owner, Frontend, Backend Developerㅤㅤ</p>
         </div>
         <br>
         <div class="developer-profile-container">
           <img src="/avatars/kiNgchev.gif" alt="kiNgchev" class="developers-picture">
           <h2>ㅤㅤkiNgchev(KINGCHEV)ㅤ</h2><p>- Founder, Owner, Down, Backend Developer</p>
+        </div>
+        <br/>
+        <div class="developer-profile-container">
+          <img src="/avatars/mefaldemisov.jpg" alt="MefAldemisov" class="developers-picture">
+          <h2>ㅤㅤMefAldemisov(MEFALDEMISOV)ㅤ</h2><p>- Frontend Developerㅤㅤㅤㅤㅤ</p>
         </div>
 
       </div>
