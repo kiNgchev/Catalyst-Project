@@ -36,6 +36,7 @@
       <div class="developers-container">
         <h3>TEAM</h3>
         <h1>Developers of project</h1>
+
         <div class="developer-profile-container">
           <br><img src="/avatars/OpenStationDev.png" alt="OpenStation" class="developers-picture">
           <br>
