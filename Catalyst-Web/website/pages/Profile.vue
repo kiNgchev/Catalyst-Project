@@ -206,7 +206,9 @@ changeUsernameEventButtonUndo() {
   this.usernameVisible = true;
   this.usernameInputButtonVisible = false;
   this.usernameInputFieldVisible = false;
+  window.removeEventListener('keypress', this.handleKeyPressRemoveAction);
 },
+  handleKeyPressRemoveAction(){},
     handleFileChange(event) {
       const file = event.target.files[0];
       if (!file) return;
