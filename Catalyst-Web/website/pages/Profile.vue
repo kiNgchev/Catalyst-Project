@@ -167,7 +167,7 @@ export default {
         this.profileName = tempUsernameFromCookie;
       }
 
-      this.imageSource = '/avatars/OpenStationDev.png';
+      this.imageSource = '/CatalystLogoPatent.png';
   },
   methods: {
     handleMouseLeave(event) {
@@ -184,6 +184,14 @@ changeUsernameEvent() {
   this.usernameVisible = false;
   this.usernameInputButtonVisible = true;
   this.usernameInputFieldVisible = true;
+  window.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      this.changeUsernameEventButton();
+    }
+    if(e.key === "Escape") {
+      this.changeUsernameEventButtonUndo();
+    }
+  })
 },
 changeUsernameEventButton() {
   if (this.usernameInputData.length < 3) {} else {
