@@ -66,3 +66,14 @@ td h1, td h2 {
     border-radius: 10px;
 }
 </style>
+
+<script setup>
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: '/PluginRow.css'
+    }
+  ]
+})
+</script>
