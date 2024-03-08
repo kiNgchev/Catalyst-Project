@@ -12,19 +12,19 @@ export default {
     return {
       items: [
         {
-          image: '/avatars/kiNgchev.gif',
-          title: 'kiNgchev',
-          description: 'Price - 0$'
+          image: '/plugins//empty-view.png',
+          title: 'Plugin 1',
+          description: 'Price - free'
         },
         {
-          image: '/avatars/OpenStationDev.png',
-          title: 'OpenStationDev',
-          description: 'Price - 0$'
+          image: '/plugins/empty-view.png',
+          title: 'Plugin 2',
+          description: 'Price - free'
         },
         {
-          image: '/avatars/mefaldemisov.jpg',
-          title: 'MefAldemisov',
-          description: 'Price - 0$'
+          image: '/plugins/empty-view.png',
+          title: 'Plugin 3',
+          description: 'Price - 1$'
         }
       ]
     }
