@@ -1,12 +1,16 @@
 <template>
-    <div class="container">
+    <div class="plugin-view-a-container">
+      <div class="item-container">
     <tr>
       <td><img class="img-plugins-row-view" :src="item.image" alt="Plugin image"></td>
+      <br>
       <td><h1>{{ item.title }}</h1></td>
       <br>
       <td><h2>{{ item.description }}</h2></td>
-      <td><button @click="handleButtonClick">Add</button></td>
+      <br>
+      <td><button @click="handleButtonClick">Order Now</button></td>
     </tr>
+    </div>
 </div>
   </template>
   
@@ -24,6 +28,10 @@
 </script>
   
 <style>
+.item-container {
+  display: flex;
+}
+
 td button {
     border: none;
     width: 100px;
@@ -31,6 +39,7 @@ td button {
     border-radius: 10px;
     height: 50px;
     font-size: 1rem;
+    font-weight: 700;
     color: #765D69;
     background-color: #FCD0BA;
     transition-duration: 1s;
@@ -45,7 +54,7 @@ td button:hover {
 td h1, td h2 {
     color: white;
 }
-.container {
+.plugin-view-a-container {
     justify-content: center;
     align-items: center;
     text-align: center;
