@@ -1,5 +1,9 @@
 <template>
     <div class="plugin-view-a-container">
+      <transition
+        appear
+        enter-active-class="animated-element-enter"
+        leave-active-class="animated-element-leave"></transition>
       <div class="item-container">
     <tr>
       <td><img class="img-plugins-row-view" :src="item.image" alt="Plugin image"></td>
@@ -15,7 +19,11 @@
   </template>
   
   <script>
+  import { gsap } from 'gsap';
   export default {
+    mounted() {
+      gsap.fromTo(this.$el, { opacity: 0}, {opacity:1,duration:1});
+    },
     props: {
       item: Object
     },
@@ -28,6 +36,10 @@
 </script>
   
 <style>
+.animated-element-enter,
+.animated-element-leave-to {
+  opacity: 0;
+}
 .item-container {
   display: flex;
 }
