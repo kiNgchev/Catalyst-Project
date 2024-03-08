@@ -17,7 +17,6 @@ bootJar {
 }
 
 dependencies {
-    implementation project(':Catalyst-DiscordCore')
     implementation project(':Catalyst-Modules')
     implementation project(':Catalyst-Core')
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
