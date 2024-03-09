@@ -1,7 +1,12 @@
 <template>
+  <transition
+    appear
+    enter-active-class="animated-element-enter"
+    leave-active-class="animated-element-leave">
   <div class="">
     <Navbar/>
     <br/>
+    
     <div class="bot-bio-container">
       <img src="/CatalystLogoPatent.png" alt="Discord Bot powerfully logo" height="100" width="100">
       <h1>ㅤCatalyst</h1>
@@ -69,13 +74,26 @@
       </div>
     </div>
   </div>
+</transition>
 </template>
 
+<script>
+import { gsap } from 'gsap';
+export default {
+  mounted() {
+    gsap.fromTo(this.$el, {opacity:0},{opacity:1,duration:1});
+  }
+}
+</script>
+
 <style>
+.animated-element-enter,
+.animated-element-leave-to {
+  opacity: 0;
+}
 .bot-description-container {
   display: block;
   transform: translateX(-90%);
-
 }
 .bot-bio-container {
   color: white;
@@ -124,6 +142,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #141417;
+  overflow-y:auto;
 }
 
 .navbar-container {

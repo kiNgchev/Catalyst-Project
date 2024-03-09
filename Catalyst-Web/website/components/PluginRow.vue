@@ -3,7 +3,7 @@
       <transition
         appear
         enter-active-class="animated-element-enter"
-        leave-active-class="animated-element-leave"></transition>
+        leave-active-class="animated-element-leave">
       <div class="item-container">
     <tr>
       <td><img class="img-plugins-row-view" :src="item.image" alt="Plugin image"></td>
@@ -15,6 +15,7 @@
       <td><button @click="handleButtonClick">Order Now</button></td>
     </tr>
     </div>
+  </transition>
 </div>
   </template>
   
