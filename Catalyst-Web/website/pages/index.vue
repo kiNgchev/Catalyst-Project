@@ -98,7 +98,7 @@ export default {
 .bot-bio-container {
   color: white;
   display: flex;
-  transform: translateX(25%);
+  transform: translateX(35%);
 }
 .bot-bio-container h1 {
   font-size: 2.5rem;
@@ -142,7 +142,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: #141417;
-  overflow-y:auto;
 }
 
 .navbar-container {
@@ -225,3 +224,13 @@ li h1 {
   background: none;
 }
 </style>
+<script setup>
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: '/PluginRow.css'
+    }
+  ]
+})
+</script>
