@@ -2,6 +2,19 @@
   <div class="">
     <Navbar/>
     <br/>
+    <div class="bot-bio-container">
+      <img src="/CatalystLogoPatent.png" alt="Discord Bot powerfully logo" height="100" width="100">
+      <h1>ㅤCatalyst</h1>
+      <div class="bot-description-container">
+        <div class="br-container">
+        <br><br><br><br><br>
+      </div>
+        <h2>Multipurpose Discord Bot.</h2>
+        <h2>Full customizable.</h2>
+        <h2>Absolutely free.</h2>
+      </div>
+      <br>
+    </div>
     <h3 class="view-our-commands">VIEW OUR COMMANDS</h3>
       <div class="commands-pre-container">
             <marquee behavior="" direction="" scrollamount="20">
@@ -59,6 +72,19 @@
 </template>
 
 <style>
+.bot-description-container {
+  display: block;
+  transform: translateX(-90%);
+
+}
+.bot-bio-container {
+  color: white;
+  display: flex;
+  transform: translateX(25%);
+}
+.bot-bio-container h1 {
+  font-size: 2.5rem;
+}
 .developer-profile-container p {
   font-size: 1.2rem;
   color: gray;

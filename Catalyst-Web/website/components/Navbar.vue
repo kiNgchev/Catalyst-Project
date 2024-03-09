@@ -95,6 +95,9 @@ li button {
   cursor: pointer;
   font-weight: 600;
 }
+li button:hover {
+  text-decoration:underline;
+}
 
 li h1 {
   color: white;
