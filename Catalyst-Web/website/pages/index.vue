@@ -8,7 +8,7 @@
     <br/>
     
     <div class="bot-bio-container">
-      <img src="/CatalystLogoPatent.png" alt="Discord Bot powerfully logo" height="100" width="100">
+      <img src="/CatalystLogoPatent.png" class="bot-patent-logo" alt="Discord Bot powerfully logo" height="100" width="100">
       <h1>ㅤCatalyst</h1>
       <div class="bot-description-container">
         <div class="br-container">
