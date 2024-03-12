@@ -6,9 +6,9 @@ import org.springframework.data.repository.NoRepositoryBean
 
 @NoRepositoryBean
 interface GuildRepository<T : GuildEntity> : JpaRepository<T, Long> {
-    fun getByGuildId(id: Long): T?
+    fun getByGuildId(id: Long?): T?
 
-    fun getAllByGuildId(id: Long): List<T>
+    fun getAllByGuildId(id: Long?): List<T>
 
-    fun existsByGuildId(id: Long): Boolean
+    fun existsByGuildId(id: Long?): Boolean
 }
