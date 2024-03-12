@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.kingchev.catalyst.ru.core.model.CommandStatus
+import net.kingchev.catalyst.ru.core.service.GuildConfigService
+import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
@@ -17,6 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired
 class CommandHandler : ListenerAdapter(), Event {
     @Autowired
     private lateinit var commandHolder: CommandHolderService
+
+    @Autowired
+    protected lateinit var guildConfigService: GuildConfigService
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
         if (event.author.isBot || event.isWebhookMessage) return
@@ -47,7 +52,8 @@ class CommandHandler : ListenerAdapter(), Event {
             guild = guild,
             author = message.author,
             authorMember = message.member,
-            args = args
+            args = args,
+            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT!!.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
@@ -56,6 +62,13 @@ class CommandHandler : ListenerAdapter(), Event {
     }
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
-        super.onSlashCommandInteraction(event)
+        val cmd: Command
+        try {
+            cmd = commandHolder.getCommandByKey(event.fullCommandName)
+        } catch (error: IllegalArgumentException) {
+            return
+        }
+
+        cmd.execute(event)
     }
 }
