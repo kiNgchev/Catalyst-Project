@@ -119,7 +119,7 @@ li h1 {
 export default {
   methods: {
     handleMouseLeave(event) {
-      if (event.clientY < 50) {
+      if (event.clientY < 50 && event.clientX < 50) {
         this.$refs.navbarContainer.style.transitionDuration = '1s';
       } else {
         this.$refs.navbarContainer.style.transitionDuration = '2s';

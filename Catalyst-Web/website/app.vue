@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style>
+body {
+  zoom: 0.8;
+}
 
 .view-our-commands {
   text-align: center;
