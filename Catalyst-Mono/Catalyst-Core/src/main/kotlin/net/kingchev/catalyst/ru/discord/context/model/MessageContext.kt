@@ -10,5 +10,6 @@ data class MessageContext(
     val guild: Guild?,
     val author: User,
     val authorMember: Member?,
-    val args: List<String>
+    val args: List<String>,
+    val locale: String
 )
