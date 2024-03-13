@@ -1,5 +1,6 @@
 package net.kingchev.catalyst.ru.discord.command.service.impl
 
+import net.dv8tion.jda.api.JDA
 import net.kingchev.catalyst.ru.discord.command.model.CatalystCommand
 import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
@@ -7,12 +8,14 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.stream.Stream
 import kotlin.concurrent.thread
 
 @Service
 class CommandHolderServiceImpl : CommandHolderService {
 
     private val commands: HashMap<String, Command> = hashMapOf();
+    private val aliases: HashMap<String, String> = hashMapOf()
 
     @Autowired
     override fun register(commands: Array<Command>) {
@@ -27,13 +30,14 @@ class CommandHolderServiceImpl : CommandHolderService {
 
                 this.commands[annotation.key] = it
                 log.info("Command `${annotation.key}` successfully loaded!")
+
                 for (alias in annotation.aliases) {
-                    if (this.commands[alias] != null) {
+                    if (this.aliases[alias] != null || this.commands[alias] != null) {
                         log.error("Command with alias `$alias` already exists!")
                         continue
                     }
 
-                    this.commands[alias] = it
+                    this.aliases[alias] = annotation.key
                     log.info("Alias `$alias` for command `${annotation.key}` successfully loaded!")
                 }
             } catch (_: NullPointerException) {
@@ -47,7 +51,16 @@ class CommandHolderServiceImpl : CommandHolderService {
     }
 
     override fun getCommandByKey(key: String): Command {
-        return commands[key] ?: throw IllegalArgumentException("Command with key {$key} does not exists")
+        return commands[key] ?: commands[aliases[key]] ?: throw IllegalArgumentException("Command with key `$key` does not exists")
+    }
+
+    override fun registerSlashCommand(jda: JDA) {
+        commands.values.forEach {
+            val data = it.build()
+            jda.upsertCommand(data).queue()
+            println(data.toData())
+            log.info("Slash command `${data.name}` is loaded")
+        }
     }
 
     companion object {

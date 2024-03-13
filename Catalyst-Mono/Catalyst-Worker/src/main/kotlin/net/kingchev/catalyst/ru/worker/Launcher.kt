@@ -13,7 +13,9 @@ import org.springframework.context.annotation.Import
 @SpringBootApplication
 class WorkerApplication {
     @Bean
-    fun errorMessages() = CatalystMessageSource("catalyst-error")
+    fun errorMessages() = CatalystMessageSource(
+        "catalyst-error", "catalyst-command", "catalyst-command-metadata"
+    )
 }
 
 object Launcher {

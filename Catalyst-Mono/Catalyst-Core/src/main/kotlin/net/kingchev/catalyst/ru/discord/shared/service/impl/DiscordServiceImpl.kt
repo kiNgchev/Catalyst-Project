@@ -45,6 +45,9 @@ class DiscordServiceImpl : DiscordService {
             .setShardsTotal(workerProperties.discord.shardsCount)
             .enableIntents(GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS))
             .build()
+        for (shard in jda.shards) {
+            commandHolder.registerSlashCommand(shard)
+        }
     }
 
     @PreDestroy

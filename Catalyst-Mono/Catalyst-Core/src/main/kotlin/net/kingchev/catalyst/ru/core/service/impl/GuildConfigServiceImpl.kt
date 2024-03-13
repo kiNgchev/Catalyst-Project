@@ -14,7 +14,7 @@ class GuildConfigServiceImpl : GuildConfigService {
     private lateinit var repository: GuildConfigRepository
 
     @CachePut(cacheNames = ["guild_config"], key = "#id")
-    override fun getById(id: Long): GuildConfig {
+    override fun getById(id: Long?): GuildConfig {
         return repository.getByGuildId(id) ?: createNew(id)
     }
 
@@ -28,7 +28,7 @@ class GuildConfigServiceImpl : GuildConfigService {
         return repository.delete(config)
     }
 
-    private fun createNew(guildId: Long): GuildConfig {
+    private fun createNew(guildId: Long?): GuildConfig {
         val config = GuildConfig()
         config.guildId = guildId
         return repository.save(config)
