@@ -63,7 +63,7 @@
         <br>
         <div class="developer-profile-container">
           <img src="/avatars/kiNgchev.gif" alt="kiNgchev" class="developers-picture">
-          <h2>ㅤㅤkiNgchev(KINGCHEV)ㅤ</h2><p>- Founder, Owner, Down, Backend Developer</p>
+          <h2>ㅤㅤkiNgchev(KINGCHEV)ㅤ</h2><p>- Founder, Owner, Backend Developerㅤㅤㅤ</p>
         </div>
         <br/>
         <div class="developer-profile-container">
