@@ -8,4 +8,5 @@ module.exports = {
         '@nuxtjs',
         'plugin:nuxt/recommended',
     ],
+    "useTypesD": false
 }
