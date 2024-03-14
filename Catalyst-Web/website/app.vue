@@ -42,7 +42,9 @@ export default {
 
 <style>
 body {
-  zoom: 0.8;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  zoom: 0.9;
 }
 
 .view-our-commands {
