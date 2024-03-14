@@ -13,8 +13,9 @@
 
 <style>
 .side {
+    position: fixed;
     width: 200px;
-    height: 10000px;
+    min-height: 200vh;
     background-color: black;
 }
 
