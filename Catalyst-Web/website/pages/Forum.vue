@@ -21,6 +21,7 @@
 .side-components button {
     padding: 0 20px;
     font-size: 1rem;
+    width: 160px;
     font-weight: 700;
     border-radius: 10px;
     height: 30px;
