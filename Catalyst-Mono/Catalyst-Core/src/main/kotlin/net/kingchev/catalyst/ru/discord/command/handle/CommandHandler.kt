@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.Interaction
 import net.kingchev.catalyst.ru.core.model.CommandStatus
 import net.kingchev.catalyst.ru.core.service.GuildConfigService
+import net.kingchev.catalyst.ru.core.service.UserConfigService
 import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
@@ -28,6 +29,9 @@ class CommandHandler : ListenerAdapter(), Event {
 
     @Autowired
     private lateinit var guildConfigService: GuildConfigService
+
+    @Autowired
+    private lateinit var userConfigService: UserConfigService
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
         if (event.author.isBot || event.isWebhookMessage) return
@@ -59,7 +63,8 @@ class CommandHandler : ListenerAdapter(), Event {
             author = message.author,
             authorMember = message.member,
             args = args,
-            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language
+            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language,
+            userLocale = userConfigService.getById(event.author.idLong).locale ?: LocaleUtils.DEFAULT.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
@@ -90,7 +95,8 @@ class CommandHandler : ListenerAdapter(), Event {
             author = interaction.user,
             authorMember = interaction.member,
             options = event.interaction.options,
-            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language
+            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language,
+            userLocale = userConfigService.getById(event.user.idLong).locale ?: LocaleUtils.DEFAULT.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {

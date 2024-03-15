@@ -32,20 +32,24 @@ class PingCommand : AbstractCommand() {
     }
 
     override fun execute(event: MessageReceivedEvent, context: MessageContext): Boolean {
+        val locale = if (context.guild != null) context.locale else context.userLocale
+
         val restPing = event.jda.restPing.complete()
         val gatewayPing = event.jda.gatewayPing
-        val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.ping.title", context.locale))
-            .setDescription(localeService.getMessage("discord.command.ping.description", context.locale, restPing, gatewayPing))
+        val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.ping.title", locale))
+            .setDescription(localeService.getMessage("discord.command.ping.description", locale, restPing, gatewayPing))
             .build()
         event.message.replyEmbeds(embed).queue()
         return true
     }
 
     override fun execute(event: SlashCommandInteractionEvent, context: SlashContext): Boolean {
+        val locale = if (context.guild != null) context.locale else context.userLocale
+
         val restPing = event.jda.restPing.complete()
         val gatewayPing = event.jda.gatewayPing
-        val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.ping.title", context.locale))
-            .setDescription(localeService.getMessage("discord.command.ping.description", context.locale, restPing, gatewayPing))
+        val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.ping.title", locale))
+            .setDescription(localeService.getMessage("discord.command.ping.description", locale, restPing, gatewayPing))
             .build()
         event.interaction.replyEmbeds(embed).queue()
         return true

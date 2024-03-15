@@ -17,6 +17,9 @@ class ErrorHandlerImpl : ErrorHandler {
     private lateinit var guildConfigService: GuildConfigService
 
     @Autowired
+    private lateinit var userConfigService: GuildConfigService
+
+    @Autowired
     private lateinit var messageService: MessageService
 
     @Autowired
@@ -45,105 +48,145 @@ class ErrorHandlerImpl : ErrorHandler {
     }
 
     private fun handleDmOnlyError(event: MessageReceivedEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.author.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.dm.only",
-            config.locale!!
+            locale
         )
         event.message.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 
     private fun handleGuildOnlyError(event: MessageReceivedEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.author.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.guild.only",
-            config.locale!!
+            locale
         )
         event.message.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 
     private fun handleBotPermissionsError(event: MessageReceivedEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.author.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.bot.permissions",
-            config.locale!!
+            locale
         )
         event.message.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 
     private fun handleUserPermissionsError(event: MessageReceivedEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.author.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.user.permissions",
-            config.locale!!
+            locale
         )
         event.message.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 
     private fun handleDmOnlyError(event: SlashCommandInteractionEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild?.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.user.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.dm.only",
-            config.locale!!
+            locale
         )
         event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 
     private fun handleGuildOnlyError(event: SlashCommandInteractionEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild?.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.user.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.guild.only",
-            config.locale!!
+            locale
         )
         event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 
     private fun handleBotPermissionsError(event: SlashCommandInteractionEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild?.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.user.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.bot.permissions",
-            config.locale!!
+            locale
         )
         event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 
     private fun handleUserPermissionsError(event: SlashCommandInteractionEvent) {
-        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val locale: String = try {
+            guildConfigService.getById(event.guild?.idLong).locale!!
+        } catch (_: IllegalStateException) {
+            userConfigService.getById(event.user.idLong).locale!!
+        }
+        
         val title = localeService.getMessage(
             "discord.command.error.title",
-            config.locale!!
+            locale
         )
         val description = localeService.getMessage(
             "discord.command.error.user.permissions",
-            config.locale!!
+            locale
         )
         event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
