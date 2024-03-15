@@ -72,6 +72,7 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
         implementation 'org.jetbrains.kotlin:kotlin-reflect'
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.1-Beta'
         implementation 'io.micrometer:micrometer-registry-prometheus'
         //Dev dependencies
         developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
