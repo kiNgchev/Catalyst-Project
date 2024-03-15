@@ -1,5 +1,6 @@
 package net.kingchev.catalyst.ru.discord.handler
 
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.kingchev.catalyst.ru.core.localezied.service.LocaleService
 import net.kingchev.catalyst.ru.core.model.CommandStatus
@@ -24,6 +25,18 @@ class ErrorHandlerImpl : ErrorHandler {
     override fun handleError(event: MessageReceivedEvent, error: CommandStatus) {
         when(error) {
             CommandStatus.SUCCESS -> { }
+            CommandStatus.UNKNOWN_ERROR -> { }
+            CommandStatus.DM_ONLY_ERROR -> handleDmOnlyError(event)
+            CommandStatus.GUILD_ONLY_ERROR -> handleGuildOnlyError(event)
+            CommandStatus.BOT_PERMISSIONS_ERROR -> handleBotPermissionsError(event)
+            CommandStatus.USER_PERMISSIONS_ERROR -> handleUserPermissionsError(event)
+        }
+    }
+
+    override fun handleError(event: SlashCommandInteractionEvent, error: CommandStatus) {
+        when(error) {
+            CommandStatus.SUCCESS -> { }
+            CommandStatus.UNKNOWN_ERROR -> { }
             CommandStatus.DM_ONLY_ERROR -> handleDmOnlyError(event)
             CommandStatus.GUILD_ONLY_ERROR -> handleGuildOnlyError(event)
             CommandStatus.BOT_PERMISSIONS_ERROR -> handleBotPermissionsError(event)
@@ -81,5 +94,57 @@ class ErrorHandlerImpl : ErrorHandler {
             config.locale!!
         )
         event.message.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
+    }
+
+    private fun handleDmOnlyError(event: SlashCommandInteractionEvent) {
+        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val title = localeService.getMessage(
+            "discord.command.error.title",
+            config.locale!!
+        )
+        val description = localeService.getMessage(
+            "discord.command.error.dm.only",
+            config.locale!!
+        )
+        event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
+    }
+
+    private fun handleGuildOnlyError(event: SlashCommandInteractionEvent) {
+        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val title = localeService.getMessage(
+            "discord.command.error.title",
+            config.locale!!
+        )
+        val description = localeService.getMessage(
+            "discord.command.error.guild.only",
+            config.locale!!
+        )
+        event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
+    }
+
+    private fun handleBotPermissionsError(event: SlashCommandInteractionEvent) {
+        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val title = localeService.getMessage(
+            "discord.command.error.title",
+            config.locale!!
+        )
+        val description = localeService.getMessage(
+            "discord.command.error.bot.permissions",
+            config.locale!!
+        )
+        event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
+    }
+
+    private fun handleUserPermissionsError(event: SlashCommandInteractionEvent) {
+        val config: GuildConfig = guildConfigService.getById(event.guild?.idLong)
+        val title = localeService.getMessage(
+            "discord.command.error.title",
+            config.locale!!
+        )
+        val description = localeService.getMessage(
+            "discord.command.error.user.permissions",
+            config.locale!!
+        )
+        event.interaction.replyEmbeds(messageService.getErrorEmbed(title, description)).queue()
     }
 }
