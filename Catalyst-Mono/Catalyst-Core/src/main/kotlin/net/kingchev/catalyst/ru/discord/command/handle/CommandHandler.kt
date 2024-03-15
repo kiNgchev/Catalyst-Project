@@ -5,12 +5,15 @@ import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
+import net.dv8tion.jda.api.interactions.Interaction
 import net.kingchev.catalyst.ru.core.model.CommandStatus
 import net.kingchev.catalyst.ru.core.service.GuildConfigService
 import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
+import net.kingchev.catalyst.ru.discord.command.service.InternalCommandService
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
+import net.kingchev.catalyst.ru.discord.context.model.SlashContext
 import net.kingchev.catalyst.ru.discord.event.model.CatalystEvent
 import net.kingchev.catalyst.ru.discord.event.model.Event
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,10 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired
 @CatalystEvent(eventName = "CommandHandlerEvent")
 class CommandHandler : ListenerAdapter(), Event {
     @Autowired
+    private lateinit var internalCommandService: InternalCommandService
+
+    @Autowired
     private lateinit var commandHolder: CommandHolderService
 
     @Autowired
-    protected lateinit var guildConfigService: GuildConfigService
+    private lateinit var guildConfigService: GuildConfigService
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
         if (event.author.isBot || event.isWebhookMessage) return
@@ -53,15 +59,19 @@ class CommandHandler : ListenerAdapter(), Event {
             author = message.author,
             authorMember = message.member,
             args = args,
-            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT!!.language
+            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
-            cmd.execute(event, context)
+            if (cmd.execute(event, context))
+                internalCommandService.ok(event, CommandStatus.SUCCESS)
+            else internalCommandService.fail(event, CommandStatus.UNKNOWN_ERROR)
         }
     }
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
+        val interaction = event.interaction
+
         val cmd: Command
         try {
             cmd = commandHolder.getCommandByKey(event.fullCommandName)
@@ -69,6 +79,24 @@ class CommandHandler : ListenerAdapter(), Event {
             return
         }
 
-        cmd.execute(event)
+        var guild: Guild? = null
+        try {
+            guild = interaction.guild
+        } catch (_: IllegalStateException) {}
+
+        val context = SlashContext(
+            interaction = interaction,
+            guild = guild,
+            author = interaction.user,
+            authorMember = interaction.member,
+            options = event.interaction.options,
+            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language
+        )
+
+        if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
+            if (cmd.execute(event, context))
+                internalCommandService.ok(event, CommandStatus.SUCCESS)
+            else internalCommandService.fail(event, CommandStatus.UNKNOWN_ERROR)
+        }
     }
 }

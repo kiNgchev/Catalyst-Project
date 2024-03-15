@@ -1,6 +1,7 @@
 package net.kingchev.catalyst.ru.discord.command.service.impl
 
 import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.kingchev.catalyst.ru.discord.command.model.CatalystCommand
 import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
@@ -8,6 +9,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.concurrent.thread
 
@@ -55,12 +57,10 @@ class CommandHolderServiceImpl : CommandHolderService {
     }
 
     override fun registerSlashCommand(jda: JDA) {
-        commands.values.forEach {
-            val data = it.build()
-            jda.upsertCommand(data).queue()
-            println(data.toData())
-            log.info("Slash command `${data.name}` is loaded")
-        }
+        commands.values.stream()
+            .parallel()
+            .map { it.build() }
+            .forEach { jda.upsertCommand(it).queue() }
     }
 
     companion object {

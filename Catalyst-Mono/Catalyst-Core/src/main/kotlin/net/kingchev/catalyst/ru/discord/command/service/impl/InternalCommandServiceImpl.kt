@@ -1,6 +1,7 @@
 package net.kingchev.catalyst.ru.discord.command.service.impl
 
 import net.dv8tion.jda.api.entities.emoji.Emoji
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.kingchev.catalyst.ru.core.model.CommandStatus
 import net.kingchev.catalyst.ru.discord.command.service.InternalCommandService
@@ -19,8 +20,17 @@ class InternalCommandServiceImpl : InternalCommandService {
         return status
     }
 
+    override fun fail(event: SlashCommandInteractionEvent, status: CommandStatus): CommandStatus {
+        errorHandler.handleError(event, status)
+        return status
+    }
+
     override fun ok(event: MessageReceivedEvent, status: CommandStatus): CommandStatus {
         event.message.addReaction(Emoji.fromUnicode("✅")).queue()
+        return status
+    }
+
+    override fun ok(event: SlashCommandInteractionEvent, status: CommandStatus): CommandStatus {
         return status
     }
 }
