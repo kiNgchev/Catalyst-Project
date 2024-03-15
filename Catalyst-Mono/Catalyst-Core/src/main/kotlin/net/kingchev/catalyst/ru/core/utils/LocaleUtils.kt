@@ -1,38 +1,26 @@
 package net.kingchev.catalyst.ru.core.utils
 
+import net.kingchev.catalyst.ru.core.model.CatalystLang
 import java.util.*
 
 object LocaleUtils {
     @JvmStatic
-    val LANGS: HashMap<String, Locale> = hashMapOf("en" to CatalystLang.EN_US.locale)
+    val LANGS: HashMap<String, Locale> = hashMapOf()
 
-    val DEFAULT = LANGS["en"]
+    val DEFAULT: Locale
 
     init {
         for (lang in CatalystLang.entries) {
             LANGS[lang.language] = lang.locale
         }
+        DEFAULT = LANGS["en"]!!
     }
 
-    fun get(locale: String): Locale = LANGS[locale] ?: DEFAULT!!
-}
-
-enum class CatalystLang(
-    val language: String,
-    val country: String,
-    val nativeName: String,
-    val englishName: String,
-    vararg val other: String
-) {
-    EN_US("en", "US", "English", "English"),
-    RU_RU("ru", "RU", "Русский", "Russian", "cyka blyat", "cheeki breeki", "rush b");
-
-    val locale: Locale = Locale(language, country)
-    val code: String = language + "_" + country
+    fun get(locale: String): Locale = LANGS[locale] ?: DEFAULT
 
     fun parse(input: String): CatalystLang {
         CatalystLang.entries.forEach {
-            if (it.name.equals(input, ignoreCase = true)
+            if (it.language.equals(input, ignoreCase = true)
                 || it.code.equals(input, ignoreCase = true)
                 || it.nativeName.equals(input, ignoreCase = true)
                 || it.englishName.equals(input, ignoreCase = true)
@@ -40,6 +28,19 @@ enum class CatalystLang(
             ) return it
         }
 
-        return EN_US
+        return CatalystLang.EN_US
+    }
+
+    fun containsLang(input: String): Boolean {
+        CatalystLang.entries.forEach {
+            if (it.language.equals(input, ignoreCase = true)
+                || it.code.equals(input, ignoreCase = true)
+                || it.nativeName.equals(input, ignoreCase = true)
+                || it.englishName.equals(input, ignoreCase = true)
+                || it.other.contains(input)
+            ) return true
+        }
+
+        return false
     }
 }
