@@ -1,4 +1,5 @@
 <template>
+    <div class="forum-container-view">
     <div class="side">
         <div class="side-components">
             <br>
@@ -9,6 +10,7 @@
             <button @click="navigateTo('/')">Home</button>
         </div>
     </div>
+</div>
 </template>
 
 <style>

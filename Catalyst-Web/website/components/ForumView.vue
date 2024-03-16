@@ -46,3 +46,13 @@ td h1, td, h2 {
     color: white
 }
 </style>
+<script setup>
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: '/PluginRow.css'
+    }
+  ]
+})
+</script>
