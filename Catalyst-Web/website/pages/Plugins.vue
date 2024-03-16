@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-  <Navbar/>
-  <h1>Explore a plugins</h1>
-  <Table :items="items"/>
+    <Navbar />
+    <h1>Explore a plugins</h1>
+    <Table :items="items" />
   </div>
 </template>
 
@@ -12,24 +12,24 @@ export default {
     return {
       items: [
         {
-          image: '/plugins//empty-view.png',
-          title: 'Plugin 1',
-          description: 'Price - free'
+          image: "/plugins//empty-view.png",
+          title: "Plugin 1",
+          description: "Price - free",
         },
         {
-          image: '/plugins/empty-view.png',
-          title: 'Plugin 2',
-          description: 'Price - free'
+          image: "/plugins/empty-view.png",
+          title: "Plugin 2",
+          description: "Price - free",
         },
         {
-          image: '/plugins/empty-view.png',
-          title: 'Plugin 3',
-          description: 'Price - 1$'
-        }
-      ]
-    }
-  }
-}
+          image: "/plugins/empty-view.png",
+          title: "Plugin 3",
+          description: "Price - 1$",
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style>

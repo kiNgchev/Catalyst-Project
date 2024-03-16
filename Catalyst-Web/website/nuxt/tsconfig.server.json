@@ -12,45 +12,21 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "paths": {
-      "#imports": [
-        "./types/nitro-imports"
-      ],
+      "#imports": ["./types/nitro-imports"],
       "#paths": [
         "../node_modules/.pnpm/nuxt@3.10.1_eslint@8.57.0_vite@5.1.1/node_modules/nuxt/dist/core/runtime/nitro/paths"
       ],
-      "~": [
-        "./.."
-      ],
-      "~/*": [
-        "../*"
-      ],
-      "@": [
-        "./.."
-      ],
-      "@/*": [
-        "../*"
-      ],
-      "~~": [
-        "./.."
-      ],
-      "~~/*": [
-        "../*"
-      ],
-      "@@": [
-        "./.."
-      ],
-      "@@/*": [
-        "../*"
-      ],
-      "assets": [
-        "../assets"
-      ],
-      "public": [
-        "../public"
-      ],
-      "public/*": [
-        "../public/*"
-      ]
+      "~": ["./.."],
+      "~/*": ["../*"],
+      "@": ["./.."],
+      "@/*": ["../*"],
+      "~~": ["./.."],
+      "~~/*": ["../*"],
+      "@@": ["./.."],
+      "@@/*": ["../*"],
+      "assets": ["../assets"],
+      "public": ["../public"],
+      "public/*": ["../public/*"]
     }
   },
   "include": [

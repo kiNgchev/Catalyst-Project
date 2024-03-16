@@ -2,88 +2,129 @@
   <transition
     appear
     enter-active-class="animated-element-enter"
-    leave-active-class="animated-element-leave">
-  <div class="">
-    <Navbar/>
-    <br/>
-    
-    <div class="bot-bio-container">
-      <img src="/CatalystLogoPatent.png" class="bot-patent-logo" alt="Discord Bot powerfully logo" height="100" width="100">
-      <h1>ㅤCatalyst</h1>
-      <div class="bot-description-container">
-        <div class="br-container">
-        <br><br><br><br><br>
+    leave-active-class="animated-element-leave"
+  >
+    <div class="">
+      <Navbar />
+      <br />
+
+      <div class="bot-bio-container">
+        <img
+          src="/CatalystLogoPatent.png"
+          class="bot-patent-logo"
+          alt="Discord Bot powerfully logo"
+          height="100"
+          width="100"
+        />
+        <h1>ㅤCatalyst</h1>
+        <div class="bot-description-container">
+          <div class="br-container"><br /><br /><br /><br /><br /></div>
+          <h2>Multipurpose Discord Bot.</h2>
+          <h2>Full customizable.</h2>
+          <h2>Absolutely free.</h2>
+        </div>
+        <br />
       </div>
-        <h2>Multipurpose Discord Bot.</h2>
-        <h2>Full customizable.</h2>
-        <h2>Absolutely free.</h2>
-      </div>
-      <br>
-    </div>
-    <h3 class="view-our-commands">VIEW OUR COMMANDS</h3>
+      <h3 class="view-our-commands">VIEW OUR COMMANDS</h3>
       <div class="commands-pre-container">
-            <marquee behavior="" direction="" scrollamount="20">
-              <div class="pre-command-container">
-                ㅤㅤㅤ<h1>/kick</h1>
-                ㅤㅤㅤ<h1>/ban</h1>
-                ㅤㅤㅤ<h1>/userinfo</h1>
-                ㅤㅤㅤ<h1>/mute</h1>
-                ㅤㅤㅤ<h1>/lock</h1>
-                ㅤㅤㅤ<h1>/purge</h1>
-                ㅤㅤㅤ<h1>/report</h1>
-                ㅤㅤㅤ<h1>/warn</h1>
-                ㅤㅤㅤ<h1>/warns</h1>
-                ㅤㅤㅤ<h1>/avatar</h1>
-                ㅤㅤㅤ<h1>/guildinfo</h1>
-                ㅤㅤㅤ<h1>/channelinfo</h1>
-                ㅤㅤㅤ<h1>/emojis</h1>
-                ㅤㅤㅤ<h1>/roles</h1>
-                ㅤㅤㅤ<h1>/ping</h1>
-                ㅤㅤㅤ<h1>/config</h1>
-                ㅤㅤㅤ<h1>/permissions</h1>
-                ㅤㅤㅤ<h1>/list</h1>
-                ㅤㅤㅤ<h1>/dashboard</h1>
-                ㅤㅤㅤ<h1>/donate</h1>
-                ㅤㅤㅤ<h1>/balance</h1>
-                ㅤㅤㅤ<h1>Coming Soon...</h1>
-              </div>
-            </marquee>
+        <marquee behavior="" direction="" scrollamount="20">
+          <div class="pre-command-container">
+            ㅤㅤㅤ
+            <h1>/kick</h1>
+            ㅤㅤㅤ
+            <h1>/ban</h1>
+            ㅤㅤㅤ
+            <h1>/userinfo</h1>
+            ㅤㅤㅤ
+            <h1>/mute</h1>
+            ㅤㅤㅤ
+            <h1>/lock</h1>
+            ㅤㅤㅤ
+            <h1>/purge</h1>
+            ㅤㅤㅤ
+            <h1>/report</h1>
+            ㅤㅤㅤ
+            <h1>/warn</h1>
+            ㅤㅤㅤ
+            <h1>/warns</h1>
+            ㅤㅤㅤ
+            <h1>/avatar</h1>
+            ㅤㅤㅤ
+            <h1>/guildinfo</h1>
+            ㅤㅤㅤ
+            <h1>/channelinfo</h1>
+            ㅤㅤㅤ
+            <h1>/emojis</h1>
+            ㅤㅤㅤ
+            <h1>/roles</h1>
+            ㅤㅤㅤ
+            <h1>/ping</h1>
+            ㅤㅤㅤ
+            <h1>/config</h1>
+            ㅤㅤㅤ
+            <h1>/permissions</h1>
+            ㅤㅤㅤ
+            <h1>/list</h1>
+            ㅤㅤㅤ
+            <h1>/dashboard</h1>
+            ㅤㅤㅤ
+            <h1>/donate</h1>
+            ㅤㅤㅤ
+            <h1>/balance</h1>
+            ㅤㅤㅤ
+            <h1>Coming Soon...</h1>
+          </div>
+        </marquee>
       </div>
-      <br/><br><br>
-    <div class="content-container">
-      <div class="developers-container">
-        <h3>TEAM</h3>
-        <h1>Developers of project</h1>
+      <br /><br /><br />
+      <div class="content-container">
+        <div class="developers-container">
+          <h3>TEAM</h3>
+          <h1>Developers of project</h1>
 
-        <div class="developer-profile-container">
-          <br><img src="/avatars/OpenStationDev.png" alt="OpenStation" class="developers-picture">
-          <br>
-          <h2>ㅤㅤOpenStation(KYBEX11)ㅤ</h2><p>- Owner, Frontend, Backend Developerㅤㅤ</p>
+          <div class="developer-profile-container">
+            <br /><img
+              src="/avatars/OpenStationDev.png"
+              alt="OpenStation"
+              class="developers-picture"
+            />
+            <br />
+            <h2>ㅤㅤOpenStation(KYBEX11)ㅤ</h2>
+            <p>- Owner, Frontend, Backend Developerㅤㅤ</p>
+          </div>
+          <br />
+          <div class="developer-profile-container">
+            <img
+              src="/avatars/kiNgchev.gif"
+              alt="kiNgchev"
+              class="developers-picture"
+            />
+            <h2>ㅤㅤkiNgchev(KINGCHEV)ㅤ</h2>
+            <p>- Founder, Owner, Backend Developerㅤㅤㅤ</p>
+          </div>
+          <br />
+          <div class="developer-profile-container">
+            <img
+              src="/avatars/mefaldemisov.jpg"
+              alt="MefAldemisov"
+              class="developers-picture"
+            />
+            <h2>ㅤㅤMefAldemisov(MEFALDEMISOV)ㅤ</h2>
+            <p>- Frontend Developerㅤㅤㅤㅤㅤ</p>
+          </div>
         </div>
-        <br>
-        <div class="developer-profile-container">
-          <img src="/avatars/kiNgchev.gif" alt="kiNgchev" class="developers-picture">
-          <h2>ㅤㅤkiNgchev(KINGCHEV)ㅤ</h2><p>- Founder, Owner, Backend Developerㅤㅤㅤ</p>
-        </div>
-        <br/>
-        <div class="developer-profile-container">
-          <img src="/avatars/mefaldemisov.jpg" alt="MefAldemisov" class="developers-picture">
-          <h2>ㅤㅤMefAldemisov(MEFALDEMISOV)ㅤ</h2><p>- Frontend Developerㅤㅤㅤㅤㅤ</p>
-        </div>
-
       </div>
     </div>
-  </div>
-</transition>
+  </transition>
 </template>
 
 <script>
-import { gsap } from 'gsap';
+import { gsap } from "gsap";
 export default {
   mounted() {
-    gsap.fromTo(this.$el, {opacity:0},{opacity:1,duration:1});
-  }
-}
+    gsap.fromTo(this.$el, { opacity: 0 }, { opacity: 1, duration: 1 });
+  },
+};
 </script>
 
 <style>
@@ -125,7 +166,7 @@ export default {
 }
 
 .commands-pre-container {
-  background: #17171A;
+  background: #17171a;
   color: white;
 }
 
@@ -135,7 +176,7 @@ export default {
 
 * {
   user-select: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -158,7 +199,7 @@ body {
 .developers-container h3,
 .view-our-commands {
   font-weight: 800;
-  color: #B0ADFF;
+  color: #b0adff;
 }
 
 .content-container {
@@ -228,9 +269,9 @@ li h1 {
 useHead({
   link: [
     {
-      rel: 'stylesheet',
-      href: '/PluginRow.css'
-    }
-  ]
-})
+      rel: "stylesheet",
+      href: "/PluginRow.css",
+    },
+  ],
+});
 </script>

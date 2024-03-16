@@ -1,6 +1,7 @@
 <template>
   <div v-if="!isClosed" class="cookie-banner">
-    <p>This site uses cookies 🍪</p>ㅤㅤ
+    <p>This site uses cookies 🍪</p>
+    ㅤㅤ
     <button @click="closeBanner">Accept</button>
   </div>
 </template>
@@ -9,11 +10,11 @@
 export default {
   data() {
     return {
-      isClosed: false
+      isClosed: false,
     };
   },
   mounted() {
-    const isBannerClosed  = useCookie('isCookieBannerClosed').value;
+    const isBannerClosed = useCookie("isCookieBannerClosed").value;
     if (isBannerClosed) {
       this.isClosed = true;
     }
@@ -21,9 +22,9 @@ export default {
   methods: {
     closeBanner() {
       this.isClosed = true;
-      useCookie('isCookieBannerClosed').value = true;
-    }
-  }
+      useCookie("isCookieBannerClosed").value = true;
+    },
+  },
 };
 </script>
 
@@ -37,14 +38,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1694FE;
+  background-color: #1694fe;
   color: #fff;
   padding: 10px;
 }
 
 .cookie-banner p {
   font-size: 1.5rem;
-  font-weight: 800
+  font-weight: 800;
 }
 
 .cookie-banner button {

@@ -2,13 +2,17 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore ."
+    "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore .",
+    "prepare": "husky"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
@@ -20,5 +24,10 @@
     "unirest": "^0.6.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "3.2.5"
   }
 }

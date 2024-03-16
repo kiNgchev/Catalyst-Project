@@ -20,39 +20,17 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "~": [
-        ".."
-      ],
-      "~/*": [
-        "../*"
-      ],
-      "@": [
-        ".."
-      ],
-      "@/*": [
-        "../*"
-      ],
-      "~~": [
-        ".."
-      ],
-      "~~/*": [
-        "../*"
-      ],
-      "@@": [
-        ".."
-      ],
-      "@@/*": [
-        "../*"
-      ],
-      "assets": [
-        "../assets"
-      ],
-      "public": [
-        "../public"
-      ],
-      "public/*": [
-        "../public/*"
-      ],
+      "~": [".."],
+      "~/*": ["../*"],
+      "@": [".."],
+      "@/*": ["../*"],
+      "~~": [".."],
+      "~~/*": ["../*"],
+      "@@": [".."],
+      "@@/*": ["../*"],
+      "assets": ["../assets"],
+      "public": ["../public"],
+      "public/*": ["../public/*"],
       "#app": [
         "../node_modules/.pnpm/nuxt@3.10.1_eslint@8.57.0_vite@5.1.1/node_modules/nuxt/dist/app"
       ],
@@ -62,21 +40,11 @@
       "vue-demi": [
         "../node_modules/.pnpm/nuxt@3.10.1_eslint@8.57.0_vite@5.1.1/node_modules/nuxt/dist/app/compat/vue-demi"
       ],
-      "#vue-router": [
-        "./vue-router-stub"
-      ],
-      "#imports": [
-        "./imports"
-      ],
-      "#build": [
-        "."
-      ],
-      "#build/*": [
-        "./*"
-      ],
-      "#components": [
-        "./components"
-      ]
+      "#vue-router": ["./vue-router-stub"],
+      "#imports": ["./imports"],
+      "#build": ["."],
+      "#build/*": ["./*"],
+      "#components": ["./components"]
     }
   },
   "include": [

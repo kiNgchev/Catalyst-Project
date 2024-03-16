@@ -1,14 +1,26 @@
 <template>
-  <div class="navbar-container" ref="navbarContainer" @mouseleave="handleMouseLeave">
+  <div
+    class="navbar-container"
+    ref="navbarContainer"
+    @mouseleave="handleMouseLeave"
+  >
     <div class="navbar-flight">
       <ul>
-        <li><h1 style="color: #B0ADFF;">ㅤㅤCatalyst</h1></li>
+        <li><h1 style="color: #b0adff">ㅤㅤCatalyst</h1></li>
         <li><button @click="navigateTo('/')">Home</button></li>
-        <li><button onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=1207361111062609951&permissions=0&scope=bot'">Invite</button></li>
+        <li>
+          <button
+            onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=1207361111062609951&permissions=0&scope=bot'"
+          >
+            Invite
+          </button>
+        </li>
         <li><button @click="navigateTo('/Dashboard')">Dashboard</button></li>
         <li><button @click="navigateTo('/Forum')">Forum</button></li>
         <li><button @click="navigateTo('/Plugins')">Plugins</button></li>
-        <li class="profile-btn"><button @click="navigateTo('/Profile')">Profile</button></li>
+        <li class="profile-btn">
+          <button @click="navigateTo('/Profile')">Profile</button>
+        </li>
       </ul>
     </div>
   </div>
@@ -17,7 +29,7 @@
 <style>
 * {
   user-select: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -33,7 +45,6 @@ body {
   transition: transform 1s ease;
 }
 
-
 .navbar-container:hover {
   transform: scale(1.04);
   transition: transform 0.5s ease;
@@ -46,7 +57,7 @@ body {
 
 .developers-container h3 {
   font-weight: 1000;
-  color: #B0ADFF;
+  color: #b0adff;
 }
 
 .content-container {
@@ -97,7 +108,7 @@ li button {
   font-weight: 600;
 }
 li button:hover {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
 li h1 {
@@ -121,11 +132,11 @@ export default {
   methods: {
     handleMouseLeave(event) {
       if (event.clientY < 50 && event.clientX < 50) {
-        this.$refs.navbarContainer.style.transitionDuration = '1s';
+        this.$refs.navbarContainer.style.transitionDuration = "1s";
       } else {
-        this.$refs.navbarContainer.style.transitionDuration = '2s';
+        this.$refs.navbarContainer.style.transitionDuration = "2s";
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

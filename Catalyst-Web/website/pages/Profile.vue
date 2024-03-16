@@ -1,30 +1,68 @@
 <template>
-<div class="page">
-  <Navbar/>
-  <br>
-  <div class="container">
-    <h3 class="profile-text">PROFILE</h3>
-    <div class="profile-container" ref="profileContainer" @mouseleave="handleMouseLeave">
-      <div class="profile-info">
-        <button class="change-avatar-button" @click="changeAvatarEvent"><img :src="imageSource"  alt="" class="profile-logo"></button> <!--Change avatar button-->
-        <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">
-        <!--<i class='bx bxs-edit-alt'></i>-->
-        <button style="display: block" class="change-username-button" @click="changeUsernameEvent" v-if="usernameVisible"><p>ㅤ{{profileName}}</p></button>
-        ㅤ<input type="text" v-model="usernameInputData"  v-if="usernameInputFieldVisible" placeholder="Enter new username" class="usernameInputField" @change="handleUsernameInputChange">
-        ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButton">Change</button>
-        ㅤ<button class="usernameInputButton" v-if="usernameInputButtonVisible" @click="changeUsernameEventButtonUndo">X</button>
+  <div class="page">
+    <Navbar />
+    <br />
+    <div class="container">
+      <h3 class="profile-text">PROFILE</h3>
+      <div
+        class="profile-container"
+        ref="profileContainer"
+        @mouseleave="handleMouseLeave"
+      >
+        <div class="profile-info">
+          <button class="change-avatar-button" @click="changeAvatarEvent">
+            <img :src="imageSource" alt="" class="profile-logo" />
+          </button>
+          <!--Change avatar button-->
+          <input
+            type="file"
+            ref="fileInput"
+            style="display: none"
+            @change="handleFileChange"
+          />
+          <!--<i class='bx bxs-edit-alt'></i>-->
+          <button
+            style="display: block"
+            class="change-username-button"
+            @click="changeUsernameEvent"
+            v-if="usernameVisible"
+          >
+            <p>ㅤ{{ profileName }}</p>
+          </button>
+          ㅤ<input
+            type="text"
+            v-model="usernameInputData"
+            v-if="usernameInputFieldVisible"
+            placeholder="Enter new username"
+            class="usernameInputField"
+            @change="handleUsernameInputChange"
+          />
+          ㅤ<button
+            class="usernameInputButton"
+            v-if="usernameInputButtonVisible"
+            @click="changeUsernameEventButton"
+          >
+            Change
+          </button>
+          ㅤ<button
+            class="usernameInputButton"
+            v-if="usernameInputButtonVisible"
+            @click="changeUsernameEventButtonUndo"
+          >
+            X
+          </button>
         </div>
-    </div>
-    <br><br><br>
-    <h3 class="profile-text">STATISTICS</h3>
-    <div class="stat-container">
-      <div class="stat-item-container">
-        <h1 class="stat-count">{{ sessions_count }}</h1>
-        <h5 class="stat-text">Sessions</h5>
+      </div>
+      <br /><br /><br />
+      <h3 class="profile-text">STATISTICS</h3>
+      <div class="stat-container">
+        <div class="stat-item-container">
+          <h1 class="stat-count">{{ sessions_count }}</h1>
+          <h5 class="stat-text">Sessions</h5>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <style>
@@ -36,7 +74,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  background-color:#17171A;
+  background-color: #17171a;
   display: flex;
   height: 160px;
 }
@@ -48,7 +86,7 @@
 
 .stat-text {
   font-size: 20px;
-  color: #ADB0B8;
+  color: #adb0b8;
 }
 
 .usernameInputButton {
@@ -76,7 +114,7 @@
 }
 
 .profile-text {
-  color: #B0ADFF;
+  color: #b0adff;
   font-weight: 800;
 }
 
@@ -142,73 +180,80 @@ useHead({
   link: [
     {
       rel: "stylesheet",
-      href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-    }
-  ]
-})
+      href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css",
+    },
+  ],
+});
 </script>
 
 <script>
 export default {
   data() {
     return {
-      sessions_count: useCookie('sessions').value,
-      imageSource: '',
-      profileName: 'Anonymous',
+      sessions_count: useCookie("sessions").value,
+      imageSource: "",
+      profileName: "Anonymous",
       usernameVisible: true,
       usernameInputButtonVisible: false,
       usernameInputFieldVisible: false,
-      usernameInputData: '',
+      usernameInputData: "",
     };
   },
   mounted() {
-      const tempUsernameFromCookie = useCookie('fhsu982897829873987ruj381936j1gs8198').value;
-      if (typeof tempUsernameFromCookie === 'string' && tempUsernameFromCookie.length >= 3) {
-        this.profileName = tempUsernameFromCookie;
-      }
+    const tempUsernameFromCookie = useCookie(
+      "fhsu982897829873987ruj381936j1gs8198",
+    ).value;
+    if (
+      typeof tempUsernameFromCookie === "string" &&
+      tempUsernameFromCookie.length >= 3
+    ) {
+      this.profileName = tempUsernameFromCookie;
+    }
 
-      this.imageSource = '/CatalystLogoPatent.png';
+    this.imageSource = "/CatalystLogoPatent.png";
   },
   methods: {
     handleMouseLeave(event) {
       if (event.clientY < 50) {
-        this.$refs.profileContainer.style.transitionDuration = '0.1s'
+        this.$refs.profileContainer.style.transitionDuration = "0.1s";
       } else {
-        this.$refs.profileContainer.style.transitionDuration = '1s';
+        this.$refs.profileContainer.style.transitionDuration = "1s";
       }
     },
     changeAvatarEvent() {
       this.$refs.fileInput.click();
     },
-changeUsernameEvent() {
-  this.usernameVisible = false;
-  this.usernameInputButtonVisible = true;
-  this.usernameInputFieldVisible = true;
-  window.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      this.changeUsernameEventButton();
-    }
-    if(e.key === "Escape") {
-      this.changeUsernameEventButtonUndo();
-    }
-  })
-},
-changeUsernameEventButton() {
-  if (this.usernameInputData.length < 3) {} else {
-    useCookie('fhsu982897829873987ruj381936j1gs8198').value = this.usernameInputData;
-    this.profileName = this.usernameInputData;
-    this.usernameVisible = true;
-    this.usernameInputButtonVisible = false;
-    this.usernameInputFieldVisible = false;
-  }
-},
-changeUsernameEventButtonUndo() {
-  this.usernameVisible = true;
-  this.usernameInputButtonVisible = false;
-  this.usernameInputFieldVisible = false;
-  window.removeEventListener('keypress', this.handleKeyPressRemoveAction);
-},
-  handleKeyPressRemoveAction(){},
+    changeUsernameEvent() {
+      this.usernameVisible = false;
+      this.usernameInputButtonVisible = true;
+      this.usernameInputFieldVisible = true;
+      window.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          this.changeUsernameEventButton();
+        }
+        if (e.key === "Escape") {
+          this.changeUsernameEventButtonUndo();
+        }
+      });
+    },
+    changeUsernameEventButton() {
+      if (this.usernameInputData.length < 3) {
+      } else {
+        useCookie("fhsu982897829873987ruj381936j1gs8198").value =
+          this.usernameInputData;
+        this.profileName = this.usernameInputData;
+        this.usernameVisible = true;
+        this.usernameInputButtonVisible = false;
+        this.usernameInputFieldVisible = false;
+      }
+    },
+    changeUsernameEventButtonUndo() {
+      this.usernameVisible = true;
+      this.usernameInputButtonVisible = false;
+      this.usernameInputFieldVisible = false;
+      window.removeEventListener("keypress", this.handleKeyPressRemoveAction);
+    },
+    handleKeyPressRemoveAction() {},
     handleFileChange(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -218,7 +263,7 @@ changeUsernameEventButtonUndo() {
         this.imageSource = e.target.result;
       };
       reader.readAsDataURL(file);
-    }
-  }
-}
+    },
+  },
+};
 </script>
