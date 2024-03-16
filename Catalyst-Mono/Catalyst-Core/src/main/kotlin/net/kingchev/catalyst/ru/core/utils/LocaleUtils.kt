@@ -5,18 +5,18 @@ import java.util.*
 
 object LocaleUtils {
     @JvmStatic
-    val LANGS: HashMap<String, Locale> = hashMapOf()
+    val LANGS: HashMap<String, CatalystLang> = hashMapOf()
 
-    val DEFAULT: Locale
+    val DEFAULT: CatalystLang
 
     init {
         for (lang in CatalystLang.entries) {
-            LANGS[lang.language] = lang.locale
+            LANGS[lang.language] = lang
         }
         DEFAULT = LANGS["en"]!!
     }
 
-    fun get(locale: String): Locale = LANGS[locale] ?: DEFAULT
+    fun get(locale: String): CatalystLang = LANGS[locale] ?: DEFAULT
 
     fun parse(input: String): CatalystLang {
         CatalystLang.entries.forEach {
