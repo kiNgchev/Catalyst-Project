@@ -20,9 +20,6 @@ import org.springframework.stereotype.Service
 class DiscordServiceImpl : DiscordService {
 
     @Autowired
-    private lateinit var coreProperties: CoreProperties;
-
-    @Autowired
     private lateinit var workerProperties: WorkerProperties;
 
     @Autowired
@@ -45,9 +42,9 @@ class DiscordServiceImpl : DiscordService {
             .setShardsTotal(workerProperties.discord.shardsCount)
             .enableIntents(GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS))
             .build()
-        for (shard in jda.shards) {
-            commandHolder.registerSlashCommand(shard)
-        }
+        jda.shards.stream()
+            .parallel()
+            .forEach { commandHolder.registerSlashCommand(it) }
     }
 
     @PreDestroy

@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
 import net.kingchev.catalyst.ru.core.model.CommandStatus
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
+import net.kingchev.catalyst.ru.discord.context.model.SlashContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -28,9 +29,11 @@ interface Command {
 
     fun execute(event: MessageReceivedEvent, context: MessageContext): Boolean
 
-    fun execute(event: SlashCommandInteractionEvent): Boolean
+    fun execute(event: SlashCommandInteractionEvent, context: SlashContext): Boolean
 
     fun isAvailable(event: MessageReceivedEvent, context: MessageContext): CommandStatus
+
+    fun isAvailable(event: SlashCommandInteractionEvent, context: SlashContext): CommandStatus
 
     companion object {
         val log: Logger
