@@ -11,6 +11,7 @@ import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
 import net.kingchev.catalyst.ru.discord.command.service.InternalCommandService
+import net.kingchev.catalyst.ru.discord.config.WorkerProperties
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
 import net.kingchev.catalyst.ru.discord.context.model.SlashContext
 import net.kingchev.catalyst.ru.discord.event.model.CatalystEvent
@@ -19,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @CatalystEvent(eventName = "CommandHandlerEvent")
 class CommandHandler : ListenerAdapter(), Event {
+    @Autowired
+    private lateinit var workerProperties: WorkerProperties
+
     @Autowired
     private lateinit var internalCommandService: InternalCommandService
 
@@ -35,7 +39,7 @@ class CommandHandler : ListenerAdapter(), Event {
         if (event.author.isBot || event.isWebhookMessage) return
 
         val message = event.message
-        val prefix = "c."
+        val prefix = workerProperties.discord.prefix
 
         if (prefix.length == event.message.contentRaw.length) return
         if (!message.contentRaw.startsWith(prefix)) return
