@@ -10,13 +10,13 @@ import net.kingchev.catalyst.ru.discord.command.model.AbstractCommand
 import net.kingchev.catalyst.ru.discord.command.model.CatalystCommand
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
 import net.kingchev.catalyst.ru.discord.context.model.SlashContext
-import java.util.Locale
 
 @CatalystCommand(
     key = "ping",
     description = "discord.command.metadata.ping.description",
     aliases = ["pong", "pi"],
-    group = "discord.command.group.misc"
+    group = "discord.command.group.misc",
+    guildOnly = false
 )
 class PingCommand : AbstractCommand() {
     override fun build(): SlashCommandData {
@@ -32,7 +32,7 @@ class PingCommand : AbstractCommand() {
     }
 
     override fun execute(event: MessageReceivedEvent, context: MessageContext): Boolean {
-        val locale = if (context.guild != null) context.locale else context.userLocale
+        val locale = context.getLocale()
 
         val restPing = event.jda.restPing.complete()
         val gatewayPing = event.jda.gatewayPing
@@ -44,7 +44,7 @@ class PingCommand : AbstractCommand() {
     }
 
     override fun execute(event: SlashCommandInteractionEvent, context: SlashContext): Boolean {
-        val locale = if (context.guild != null) context.locale else context.userLocale
+        val locale = context.getLocale()
 
         val restPing = event.jda.restPing.complete()
         val gatewayPing = event.jda.gatewayPing

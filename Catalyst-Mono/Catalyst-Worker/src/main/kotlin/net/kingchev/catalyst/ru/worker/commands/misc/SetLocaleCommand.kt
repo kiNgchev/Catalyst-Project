@@ -24,7 +24,8 @@ import java.util.stream.Collectors
 @CatalystCommand(
     key = "setl",
     description = "discord.command.metadata.set.language.description",
-    group = "discord.command.group.misc"
+    group = "discord.command.group.misc",
+    guildOnly = false
 )
 class SetLocaleCommand : AbstractCommand() {
     override fun build(): SlashCommandData {
@@ -62,10 +63,10 @@ class SetLocaleCommand : AbstractCommand() {
     }
 
     override fun execute(event: MessageReceivedEvent, context: MessageContext): Boolean {
-        var locale = if (context.guild != null) context.locale else context.userLocale
+        var locale = context.getLocale()
 
         val lang = try {
-            context.args[0]
+            LocaleUtils.parse(context.args[0])
         } catch (e: IndexOutOfBoundsException) {
             val embed = messageService.getErrorEmbed(
                 localeService.getMessage("discord.command.error.title", locale),
@@ -75,68 +76,67 @@ class SetLocaleCommand : AbstractCommand() {
             return false
         }
 
-        if (!LocaleUtils.containsLang(lang)) {
+        if (!LocaleUtils.containsLang(context.args[0])) {
             val embed = messageService.getErrorEmbed(
                 localeService.getMessage("discord.command.error.title", locale),
-                localeService.getMessage("discord.command.error.set.language.notbeset", locale, lang)
+                localeService.getMessage("discord.command.error.set.language.notbeset", locale, lang.language)
             )
             event.message.replyEmbeds(embed).queue()
             return false
         }
 
+        context.setLocale(lang.language)
 
         if (context.guild != null) {
-            val config = guildConfigService.getById(context.guild?.idLong)
-            config.locale = lang
-            context.locale = lang
+            val config = guildConfigService.getById(context.guild!!.idLong, true)
+            config.locale = lang.language
             guildConfigService.save(config)
         } else {
-            val config = userConfigService.getById(context.author.idLong)
-            config.locale = lang
-            context.userLocale = lang
+            val config = userConfigService.getById(context.author.idLong, true)
+            config.locale = lang.language
             userConfigService.save(config)
         }
 
         //Update locale for continue command execution
-        locale = if (context.guild != null) context.locale else context.userLocale
+        locale = context.getLocale()
 
         val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.set.language.title", locale))
-            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang))
+            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang.language))
             .build()
         event.message.replyEmbeds(embed).queue()
         return true
     }
 
     override fun execute(event: SlashCommandInteractionEvent, context: SlashContext): Boolean {
-        var locale = if (context.guild != null) context.locale else context.userLocale
+        var locale = context.getLocale()
 
-        val lang = context.options[0].asString
-        if (!LocaleUtils.containsLang(lang)) {
+        val lang = LocaleUtils.parse(context.options[0].asString)
+        if (!LocaleUtils.containsLang(context.options[0].asString)) {
             val embed = messageService.getErrorEmbed(
                 localeService.getMessage("discord.command.error.title", locale),
-                localeService.getMessage("discord.command.error.set.language.notbeset", locale, lang)
+                localeService.getMessage("discord.command.error.set.language.notbeset", locale, lang.language)
             )
             event.interaction.replyEmbeds(embed)
             return false
         }
 
+        context.setLocale(lang.language)
+
         if (context.guild != null) {
-            val config = guildConfigService.getById(context.guild?.idLong)
-            config.locale = lang
-            context.locale = lang
+            val config = guildConfigService.getById(context.guild!!.idLong, true)
+            config.locale = lang.language
             guildConfigService.save(config)
         } else {
-            val config = userConfigService.getById(context.author.idLong)
-            config.locale = lang
-            context.userLocale = lang
+            val config = userConfigService.getById(context.author.idLong, true)
+            config.locale = lang.language
             userConfigService.save(config)
         }
 
         //Update locale for continue command execution
-        locale = if (context.guild != null) context.locale else context.userLocale
+        locale = context.getLocale()
 
         val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.set.language.title", locale))
-            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang))
+            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang.language))
             .build()
         event.interaction.replyEmbeds(embed).queue()
         return true
@@ -147,7 +147,9 @@ class SetLocaleCommand : AbstractCommand() {
         override fun onCommandAutoCompleteInteraction(event: CommandAutoCompleteInteractionEvent) {
             if (event.fullCommandName == "setl" && event.focusedOption.name == "language") {
                 val options = CatalystLang.entries.stream()
-                    .filter { it.language.startsWith(event.focusedOption.value) }
+                    .filter { it.language.startsWith(event.focusedOption.value)
+                            || it.nativeName.startsWith(event.focusedOption.value)
+                            || it.englishName.startsWith(event.focusedOption.value) }
                     .map { Command.Choice(
                         "${it.englishName} (${it.nativeName})",
                         it.language) }
