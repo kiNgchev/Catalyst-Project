@@ -4,7 +4,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.MappedSuperclass
 
 @MappedSuperclass
-abstract class UserEntity {
+abstract class UserEntity : BaseEntity() {
     @Column(name = "user_id")
     var userId: Long? = null
 }
