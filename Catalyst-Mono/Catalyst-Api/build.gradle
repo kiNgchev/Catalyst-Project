@@ -16,6 +16,10 @@ bootJar {
     mainClass = 'net.kingchev.catalyst.ru.api.Launcher'
 }
 
+springBoot {
+    mainClass = 'net.kingchev.catalyst.ru.api.Launcher'
+}
+
 dependencies {
     implementation project(':Catalyst-Modules')
     implementation project(':Catalyst-Core')

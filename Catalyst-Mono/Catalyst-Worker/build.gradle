@@ -12,7 +12,15 @@ application {
     mainClassName = 'net.kingchev.catalyst.ru.worker.Launcher'
 }
 
+jar {
+    enabled = false
+}
+
 bootJar {
+    mainClass = 'net.kingchev.catalyst.ru.worker.Launcher'
+}
+
+springBoot {
     mainClass = 'net.kingchev.catalyst.ru.worker.Launcher'
 }
 

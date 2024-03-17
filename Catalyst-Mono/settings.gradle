@@ -3,5 +3,4 @@ include 'Catalyst-Core'
 include 'Catalyst-Worker'
 include 'Catalyst-Api'
 include 'Catalyst-Modules'
-include 'Catalyst-DiscordCore'
 
