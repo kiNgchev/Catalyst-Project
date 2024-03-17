@@ -1,0 +1,49 @@
+spring:
+  docker:
+    compose:
+      enabled: true
+      file: compose.yaml
+  datasource:
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:6432,localhost:6433,localhost:6434/catalyst?connectTimeout=1&hostRecheckSeconds=2&socketTimeout=600&targetServerType=primary"
+    username: "root"
+    password: "secret"
+  cache:
+    type: redis
+    redis:
+      time-to-live: 30
+      cache-null-values: true
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+  quartz:
+    wait-for-jobs-to-complete-on-shutdown: false
+  main:
+    lazy-initialization: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+# noinspection SpringBootApplicationYaml
+application:
+  version: "@application.version@"
+  author: "@application.author@"
