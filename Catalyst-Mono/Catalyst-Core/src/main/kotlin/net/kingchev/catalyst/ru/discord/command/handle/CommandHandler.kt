@@ -1,11 +1,9 @@
 package net.kingchev.catalyst.ru.discord.command.handle
 
 import net.dv8tion.jda.api.entities.Guild
-import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
-import net.dv8tion.jda.api.interactions.Interaction
 import net.kingchev.catalyst.ru.core.model.CommandStatus
 import net.kingchev.catalyst.ru.core.service.GuildConfigService
 import net.kingchev.catalyst.ru.core.service.UserConfigService
@@ -63,14 +61,14 @@ class CommandHandler : ListenerAdapter(), Event {
             author = message.author,
             authorMember = message.member,
             args = args,
-            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language,
-            userLocale = userConfigService.getById(event.author.idLong).locale ?: LocaleUtils.DEFAULT.language
+            guildLocale = guildConfigService.getById(guild?.idLong ?: -1L)?.locale ?: LocaleUtils.DEFAULT.language,
+            userLocale = userConfigService.getById(event.author.idLong)?.locale ?: LocaleUtils.DEFAULT.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
             if (cmd.execute(event, context))
-                internalCommandService.ok(event, CommandStatus.SUCCESS)
-            else internalCommandService.fail(event, CommandStatus.UNKNOWN_ERROR)
+                internalCommandService.ok(context, CommandStatus.SUCCESS)
+            else internalCommandService.fail(context, CommandStatus.UNKNOWN_ERROR)
         }
     }
 
@@ -95,14 +93,14 @@ class CommandHandler : ListenerAdapter(), Event {
             author = interaction.user,
             authorMember = interaction.member,
             options = event.interaction.options,
-            locale = guildConfigService.getById(guild?.idLong).locale ?: LocaleUtils.DEFAULT.language,
-            userLocale = userConfigService.getById(event.user.idLong).locale ?: LocaleUtils.DEFAULT.language
+            guildLocale = guildConfigService.getById(guild?.idLong ?: -1L)?.locale ?: LocaleUtils.DEFAULT.language,
+            userLocale = userConfigService.getById(event.user.idLong)?.locale ?: LocaleUtils.DEFAULT.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
             if (cmd.execute(event, context))
-                internalCommandService.ok(event, CommandStatus.SUCCESS)
-            else internalCommandService.fail(event, CommandStatus.UNKNOWN_ERROR)
+                internalCommandService.ok(context, CommandStatus.SUCCESS)
+            else internalCommandService.fail(context, CommandStatus.UNKNOWN_ERROR)
         }
     }
 }
