@@ -14,7 +14,7 @@ class LocaleServiceImpl : LocaleService {
     private lateinit var messageSource: CatalystMessageSource
     override fun getMessage(key: String, locale: String): String {
         return try {
-            messageSource.getMessage(key, null, LocaleUtils.get(locale))
+            messageSource.getMessage(key, null, LocaleUtils.get(locale).locale)
         } catch (_: NoSuchMessageException) {
             key
         }
@@ -22,7 +22,7 @@ class LocaleServiceImpl : LocaleService {
 
     override fun getMessage(key: String, locale: String, vararg objects: Any): String {
         return try {
-            messageSource.getMessage(key, objects, LocaleUtils.get(locale)).format(objects)
+            messageSource.getMessage(key, objects, LocaleUtils.get(locale).locale).format(objects)
         } catch (_: NoSuchMessageException) {
             key
         }
