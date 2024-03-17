@@ -3,6 +3,7 @@ package net.kingchev.catalyst.ru.core.service.impl
 import net.kingchev.catalyst.ru.core.persistence.entity.GuildConfig
 import net.kingchev.catalyst.ru.core.persistence.repository.GuildConfigRepository
 import net.kingchev.catalyst.ru.core.service.GuildConfigService
+import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
@@ -14,8 +15,14 @@ class GuildConfigServiceImpl : GuildConfigService {
     private lateinit var repository: GuildConfigRepository
 
     @CachePut(cacheNames = ["guild_config"], key = "#id")
-    override fun getById(id: Long?): GuildConfig {
-        return repository.getByGuildId(id) ?: createNew(id)
+    override fun getById(id: Long): GuildConfig? {
+        return repository.getByGuildId(id)
+    }
+
+    @CachePut(cacheNames = ["guild_config"], key = "#id")
+    override fun getById(id: Long, createNew: Boolean): GuildConfig {
+        if (createNew) return repository.getByGuildId(id) ?: createNew(id)
+        else throw NullPointerException("Guild config with id `$id` not found")
     }
 
     @CacheEvict(cacheNames = ["guild_config"])
@@ -28,9 +35,10 @@ class GuildConfigServiceImpl : GuildConfigService {
         return repository.delete(config)
     }
 
-    private fun createNew(guildId: Long?): GuildConfig {
+    private fun createNew(guildId: Long): GuildConfig {
         val config = GuildConfig()
         config.guildId = guildId
+        config.locale = LocaleUtils.DEFAULT.language
         return repository.save(config)
     }
 }
