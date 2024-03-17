@@ -20,7 +20,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler
 )
 @Configuration
 @EnableConfigurationProperties
-@ComponentScan(basePackages = ["net.kingchev.catalyst.ru"])
+@ComponentScan(basePackages = ["net.kingchev.catalyst.ru.core"])
 @EntityScan(basePackages = ["net.kingchev.catalyst.ru.core.persistence.entity"])
 @EnableJpaRepositories(basePackages = ["net.kingchev.catalyst.ru.core.persistence.repository"])
 class CoreConfiguration {

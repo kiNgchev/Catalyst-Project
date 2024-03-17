@@ -23,6 +23,8 @@ class WorkerProperties {
     class Discord(
         @Value("\${token}")
         val token: String,
+        @Value("\${prefix}")
+        val prefix: String
     ) {
         val shardsCount: Int = 2
     }
