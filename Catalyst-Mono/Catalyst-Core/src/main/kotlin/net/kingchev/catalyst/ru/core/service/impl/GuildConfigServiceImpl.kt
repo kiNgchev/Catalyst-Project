@@ -5,11 +5,13 @@ import net.kingchev.catalyst.ru.core.persistence.repository.GuildConfigRepositor
 import net.kingchev.catalyst.ru.core.service.GuildConfigService
 import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
 import org.springframework.stereotype.Service
 
 @Service
+@CacheConfig(cacheNames = ["guild_config_cache"])
 class GuildConfigServiceImpl : GuildConfigService {
     @Autowired
     private lateinit var repository: GuildConfigRepository

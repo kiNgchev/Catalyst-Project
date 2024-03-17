@@ -5,12 +5,14 @@ import net.kingchev.catalyst.ru.core.persistence.repository.UserConfigRepository
 import net.kingchev.catalyst.ru.core.service.UserConfigService
 import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
 import org.springframework.cglib.core.Local
 import org.springframework.stereotype.Service
 
 @Service
+@CacheConfig(cacheNames = ["user_config_cache"])
 class UserConfigServiceImpl : UserConfigService {
     @Autowired
     private lateinit var repository: UserConfigRepository
