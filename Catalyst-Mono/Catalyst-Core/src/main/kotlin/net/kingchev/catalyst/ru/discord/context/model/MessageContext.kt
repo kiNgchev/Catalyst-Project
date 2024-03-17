@@ -11,6 +11,18 @@ data class MessageContext(
     val author: User,
     val authorMember: Member?,
     var args: List<String> = listOf(),
-    var locale: String,
+    var guildLocale: String,
     var userLocale: String
-)
+) {
+    fun setLocale(locale: String) {
+        if (guild != null) {
+            this.guildLocale = locale
+        } else {
+            this.userLocale = locale
+        }
+    }
+
+    fun getLocale(): String {
+        return if (guild != null) guildLocale else userLocale
+    }
+}
