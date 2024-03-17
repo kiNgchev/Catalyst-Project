@@ -27,11 +27,14 @@ class RedisConfiguration {
 
     @Bean
     fun cacheManager(factory: RedisConnectionFactory?): CacheManager {
-        val serializer = RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer())
-
         val redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-            .serializeKeysWith(serializer)
-            .serializeValuesWith(serializer)
+            .serializeKeysWith(
+                RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer())
+            )
+            .serializeValuesWith(
+                RedisSerializationContext.SerializationPair
+                    .fromSerializer(GenericJackson2JsonRedisSerializer())
+            )
 
         return RedisCacheManager.builder(factory!!)
             .cacheDefaults(redisCacheConfiguration)
