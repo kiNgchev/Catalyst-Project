@@ -21,7 +21,7 @@ class GuildDao : AbstractDao() {
     @Transactional
     fun saveUserConfig(guildConfigDto: GuildConfigDto, userId: Long) {
         val config = guildConfigService.getById(userId, true)
-        mapper.updateGuildConfig(guildConfigDto, config)
+        configMapper.updateGuildConfig(guildConfigDto, config)
         guildConfigService.save(config)
     }
 }

@@ -21,7 +21,7 @@ class UserDao : AbstractDao()  {
     @Transactional
     fun saveUserConfig(userConfigDto: UserConfigDto, userId: Long) {
         val config = userConfigService.getById(userId, true)
-        mapper.updateUserConfig(userConfigDto, config)
+        configMapper.updateUserConfig(userConfigDto, config)
         userConfigService.save(config)
     }
 }
