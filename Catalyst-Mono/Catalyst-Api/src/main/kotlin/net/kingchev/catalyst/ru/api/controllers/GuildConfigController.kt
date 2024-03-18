@@ -13,14 +13,14 @@ class GuildConfigController {
     private lateinit var guildDao: GuildDao
 
     @GetMapping("/guilds/{id}")
-    fun getUserConfig(@PathVariable("id") id: String): ResponseEntity<GuildConfigDto> {
+    fun getGuildConfig(@PathVariable("id") id: String): ResponseEntity<GuildConfigDto> {
         val _id = id.toLong()
         val config = guildDao.getGuildConfig(_id)
         return ResponseEntity.ok(config)
     }
 
     @PostMapping("/guilds")
-    fun updateUserConfig(@RequestBody config: GuildConfigDto): ResponseEntity<GuildConfigDto> {
+    fun updateGuildConfig(@RequestBody config: GuildConfigDto): ResponseEntity<GuildConfigDto> {
         guildDao.saveUserConfig(config, config.guildId ?: -1)
         return ResponseEntity.ok(config)
     }
