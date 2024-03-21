@@ -1,11 +1,8 @@
 package net.kingchev.catalyst.ru.core.persistence.entity.base
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.MappedSuperclass
+import org.springframework.data.relational.core.mapping.Column
 
-@MappedSuperclass
 abstract class GuildEntity : BaseEntity() {
-    @Column(name = "guild_id")
+    @Column(value = "guild_id")
     var guildId: Long? = null
 }

@@ -65,8 +65,14 @@ class CommandHandler : ListenerAdapter(), Event {
             author = message.author,
             authorMember = message.member,
             args = args,
-            guildLocale = guildConfigService.getById(guild?.idLong ?: -1L)?.locale ?: LocaleUtils.DEFAULT.language,
-            userLocale = userConfigService.getById(event.author.idLong)?.locale ?: LocaleUtils.DEFAULT.language
+            guildLocale = guildConfigService
+                .getById(guild?.idLong ?: -1L)
+                .block()?.locale
+                ?: LocaleUtils.DEFAULT.language,
+            userLocale = userConfigService
+                .getById(event.author.idLong)
+                .block()?.locale
+                ?: LocaleUtils.DEFAULT.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
@@ -97,8 +103,14 @@ class CommandHandler : ListenerAdapter(), Event {
             author = interaction.user,
             authorMember = interaction.member,
             options = event.interaction.options,
-            guildLocale = guildConfigService.getById(guild?.idLong ?: -1L)?.locale ?: LocaleUtils.DEFAULT.language,
-            userLocale = userConfigService.getById(event.user.idLong)?.locale ?: LocaleUtils.DEFAULT.language
+            guildLocale = guildConfigService
+                .getById(guild?.idLong ?: -1L)
+                .block()?.locale
+                ?: LocaleUtils.DEFAULT.language,
+            userLocale = userConfigService
+                .getById(event.user.idLong)
+                .block()?.locale
+                ?: LocaleUtils.DEFAULT.language
         )
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {

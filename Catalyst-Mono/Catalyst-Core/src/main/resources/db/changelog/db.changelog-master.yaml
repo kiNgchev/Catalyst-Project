@@ -1,2 +1,43 @@
 databaseChangeLog:
-  -
+  - changeSet:
+      logicalFilePath: classpath:/db/changelog/db.changelog-migration1.yaml
+      id: 1
+      author: kiNgchev
+      changes:
+        - createTable:
+            tableName: guild_config
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: guild_id
+                  type: BIGINT
+              - column:
+                  name: locale
+                  type: varchar(20)
+  - changeSet:
+      logicalFilePath: classpath:/db/changelog/db.changelog-migration2.yaml
+      id: 2
+      author: kiNgchev
+      changes:
+        - createTable:
+            tableName: user_config
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: locale
+                  type: varchar(20)

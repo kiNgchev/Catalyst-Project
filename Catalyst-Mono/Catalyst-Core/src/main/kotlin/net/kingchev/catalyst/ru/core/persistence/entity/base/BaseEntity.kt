@@ -1,13 +1,11 @@
 package net.kingchev.catalyst.ru.core.persistence.entity.base
 
-import jakarta.persistence.*
+import org.springframework.data.annotation.Id
 import java.io.Serializable
 import java.util.Objects
 
-@MappedSuperclass
 abstract class BaseEntity : Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
     override fun hashCode(): Int {

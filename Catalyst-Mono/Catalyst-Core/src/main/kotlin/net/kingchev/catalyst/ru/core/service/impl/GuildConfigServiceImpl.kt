@@ -9,6 +9,8 @@ import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import reactor.core.publisher.Mono
 
 @Service
 @CacheConfig(cacheNames = ["guild_config_cache"])
@@ -16,28 +18,27 @@ class GuildConfigServiceImpl : GuildConfigService {
     @Autowired
     private lateinit var repository: GuildConfigRepository
 
+    @Transactional
     @CachePut(cacheNames = ["guild_config"], key = "#id")
-    override fun getById(id: Long): GuildConfig? {
-        return repository.getByGuildId(id)
+    override fun getById(id: Long): Mono<GuildConfig> {
+        return repository.getByGuildId(id).switchIfEmpty(createNew(id))
     }
 
-    @CachePut(cacheNames = ["guild_config"], key = "#id")
-    override fun getById(id: Long, createNew: Boolean): GuildConfig {
-        if (createNew) return repository.getByGuildId(id) ?: createNew(id)
-        else throw NullPointerException("Guild config with id `$id` not found")
-    }
-
+    @Transactional
     @CacheEvict(cacheNames = ["guild_config"])
-    override fun save(config: GuildConfig): GuildConfig {
+    override fun save(config: GuildConfig): Mono<GuildConfig> {
         return repository.save(config)
     }
 
+    @Transactional
     @CacheEvict(cacheNames = ["guild_config"])
     override fun delete(config: GuildConfig) {
         return repository.delete(config)
+            .cast(Unit::class.java)
+            .block()!!
     }
 
-    private fun createNew(guildId: Long): GuildConfig {
+    private fun createNew(guildId: Long): Mono<GuildConfig> {
         val config = GuildConfig()
         config.guildId = guildId
         config.locale = LocaleUtils.DEFAULT.language

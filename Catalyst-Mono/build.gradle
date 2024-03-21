@@ -61,19 +61,32 @@ subprojects {
         //No-spring implementations
         implementation "net.dv8tion:JDA:5.0.0-beta.19"
         //Spring implementations
-        implementation 'redis.clients:jedis'
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        //Web
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
+        //Main
         implementation 'org.springframework.boot:spring-boot-starter-amqp'
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
         implementation 'org.springframework.boot:spring-boot-starter-jdbc'
         implementation 'org.springframework.boot:spring-boot-starter-quartz'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        //Metrics
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'io.micrometer:micrometer-registry-prometheus'
+        //Data
+        implementation 'org.postgresql:postgresql'
+        implementation 'org.postgresql:r2dbc-postgresql'
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+        implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+        //Kt extensions
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-reactor'
         implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
         implementation 'org.jetbrains.kotlin:kotlin-reflect'
-        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.1-Beta'
-        implementation 'io.micrometer:micrometer-registry-prometheus'
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm'
+        //Хз как назвать
         implementation 'org.mapstruct:mapstruct:1.5.5.Final'
         //Dev dependencies
         developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
@@ -81,7 +94,6 @@ subprojects {
         compileOnly 'joda-time:joda-time:2.12.7'
         compileOnly 'org.projectlombok:lombok'
         //runtime only
-        runtimeOnly 'org.postgresql:postgresql'
         //Annotation processors
         annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

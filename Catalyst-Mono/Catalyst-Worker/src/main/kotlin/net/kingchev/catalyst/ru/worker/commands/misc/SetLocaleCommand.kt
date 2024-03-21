@@ -88,13 +88,13 @@ class SetLocaleCommand : AbstractCommand() {
         context.setLocale(lang.language)
 
         if (context.guild != null) {
-            val config = guildConfigService.getById(context.guild!!.idLong, true)
+            val config = guildConfigService.getById(context.guild!!.idLong).block()!!
             config.locale = lang.language
-            guildConfigService.save(config)
+            guildConfigService.save(config).block()
         } else {
-            val config = userConfigService.getById(context.author.idLong, true)
+            val config = userConfigService.getById(context.author.idLong).block()!!
             config.locale = lang.language
-            userConfigService.save(config)
+            userConfigService.save(config).block()
         }
 
         //Update locale for continue command execution
@@ -123,13 +123,13 @@ class SetLocaleCommand : AbstractCommand() {
         context.setLocale(lang.language)
 
         if (context.guild != null) {
-            val config = guildConfigService.getById(context.guild!!.idLong, true)
+            val config = guildConfigService.getById(context.guild!!.idLong).block()!!
             config.locale = lang.language
-            guildConfigService.save(config)
+            guildConfigService.save(config).block()
         } else {
-            val config = userConfigService.getById(context.author.idLong, true)
+            val config = userConfigService.getById(context.author.idLong).block()!!
             config.locale = lang.language
-            userConfigService.save(config)
+            userConfigService.save(config).block()
         }
 
         //Update locale for continue command execution

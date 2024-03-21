@@ -13,13 +13,11 @@ import org.mapstruct.Mappings
 interface ConfigMapperService {
 
     @Mappings(
-        Mapping(target = "id", ignore = true),
         Mapping(target = "guildId", ignore = true)
     )
     fun updateGuildConfig(config: GuildConfigDto, @MappingTarget guildConfig: GuildConfig)
 
     @Mappings(
-        Mapping(target = "id", ignore = true),
         Mapping(target = "userId", ignore = true)
     )
     fun updateUserConfig(config: UserConfigDto, @MappingTarget userConfig: UserConfig)

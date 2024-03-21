@@ -3,26 +3,28 @@ package net.kingchev.catalyst.ru.core.config
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.context.properties.EnableConfigurationProperties
-import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.core.task.TaskExecutor
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
+import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 import org.springframework.scheduling.TaskScheduler
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler
+import org.springframework.transaction.annotation.EnableTransactionManagement
+import org.springframework.web.reactive.config.EnableWebFlux
 
 @Import(
-    RedisConfiguration::class
+    RedisConfiguration::class,
 )
 @Configuration
+@EnableWebFlux
+@EnableTransactionManagement
 @EnableConfigurationProperties
-@ComponentScan(basePackages = ["net.kingchev.catalyst.ru.core"])
+@EnableR2dbcRepositories(basePackages = ["net.kingchev.catalyst.ru.core.persistence.repository"])
 @EntityScan(basePackages = ["net.kingchev.catalyst.ru.core.persistence.entity"])
-@EnableJpaRepositories(basePackages = ["net.kingchev.catalyst.ru.core.persistence.repository"])
+@ComponentScan(basePackages = ["net.kingchev.catalyst.ru.core"])
 class CoreConfiguration {
     @Autowired
     lateinit var coreProperties: CoreProperties;
