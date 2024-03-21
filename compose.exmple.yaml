@@ -54,138 +54,36 @@ services:
       - "./docker-data/prometheus:/prometheus"
     networks:
       - monitoring
-  #MySQL
-  pg-1:
-    image: docker.io/bitnami/postgresql-repmgr:latest
-    ports:
-      - "6432:5432"
-    volumes:
-      - "./docker-data/postgres-1:/bitnami/postgresql"
-      - "./config/postgres/create_extensions.sql:/docker-entrypoint-initdb.d/create_extensions.sql:ro"
+  #Postgres
+  postgres:
+    image: 'postgres:latest'
     environment:
-      - "POSTGRESQL_POSTGRES_PASSWORD=adminsecret"
-      - "POSTGRESQL_USERNAME=root"
-      - "POSTGRESQL_PASSWORD=secret"
-      - "POSTGRESQL_DATABASE=your"
-      - "REPMGR_PASSWORD=repmgrpassword"
-      - "REPMGR_PRIMARY_HOST=pg-1"
-      - "REPMGR_PRIMARY_PORT=5432"
-      - "REPMGR_PARTNER_NODES=pg-1,pg-2,pg-3:5432"
-      - "REPMGR_NODE_NAME=pg-1"
-      - "REPMGR_NODE_NETWORK_NAME=pg-1"
-      - "REPMGR_PORT_NUMBER=5432"
-      - "REPMGR_CONNECT_TIMEOUT=1"
-      - "REPMGR_RECONNECT_ATTEMPTS=2"
-      - "REPMGR_RECONNECT_INTERVAL=1"
-      - "REPMGR_MASTER_RESPONSE_TIMEOUT=5"
+      - 'POSTGRES_DB=catalyst'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '6432:5432'
     restart: unless-stopped
     networks:
-      - postgres
+      - postgres-network
 
-  pg-2:
-    image: docker.io/bitnami/postgresql-repmgr:latest
-    ports:
-      - "6433:5432"
-    volumes:
-      - "./docker-data/postgres-2:/bitnami/postgresql"
-      - "./config/postgres/create_extensions.sql:/docker-entrypoint-initdb.d/create_extensions.sql:ro"
-    environment:
-      - "POSTGRESQL_POSTGRES_PASSWORD=adminsecret"
-      - "POSTGRESQL_USERNAME=root"
-      - "POSTGRESQL_PASSWORD=secret"
-      - "POSTGRESQL_DATABASE=your"
-      - "REPMGR_PASSWORD=repmgrpassword"
-      - "REPMGR_PRIMARY_HOST=pg-1"
-      - "REPMGR_PRIMARY_PORT=5432"
-      - "REPMGR_PARTNER_NODES=pg-1,pg-2,pg-3:5432"
-      - "REPMGR_NODE_NAME=pg-2"
-      - "REPMGR_NODE_NETWORK_NAME=pg-2"
-      - "REPMGR_PORT_NUMBER=5432"
-      - "REPMGR_CONNECT_TIMEOUT=1"
-      - "REPMGR_RECONNECT_ATTEMPTS=2"
-      - "REPMGR_RECONNECT_INTERVAL=1"
-      - "REPMGR_MASTER_RESPONSE_TIMEOUT=5"
-    restart: unless-stopped
-    networks:
-      - postgres
-  pg-3:
-    image: docker.io/bitnami/postgresql-repmgr:latest
-    ports:
-      - "6434:5432"
-    volumes:
-      - "./docker-data/postgres-3:/bitnami/postgresql"
-      - "./config/postgres/create_extensions.sql:/docker-entrypoint-initdb.d/create_extensions.sql:ro"
-    environment:
-      - "POSTGRESQL_POSTGRES_PASSWORD=adminsecret"
-      - "POSTGRESQL_USERNAME=root"
-      - "POSTGRESQL_PASSWORD=secret"
-      - "POSTGRESQL_DATABASE=your"
-      - "REPMGR_PASSWORD=repmgrpassword"
-      - "REPMGR_PRIMARY_HOST=pg-1"
-      - "REPMGR_PRIMARY_PORT=5432"
-      - "REPMGR_PARTNER_NODES=pg-1,pg-2,pg-3:5432"
-      - "REPMGR_NODE_NAME=pg-3"
-      - "REPMGR_NODE_NETWORK_NAME=pg-3"
-      - "REPMGR_PORT_NUMBER=5432"
-      - "REPMGR_CONNECT_TIMEOUT=1"
-      - "REPMGR_RECONNECT_ATTEMPTS=2"
-      - "REPMGR_RECONNECT_INTERVAL=1"
-      - "REPMGR_MASTER_RESPONSE_TIMEOUT=5"
-    restart: unless-stopped
-    networks:
-      - postgres
-
-  postgres-exporter-1:
+  postgres-exporter:
     image: prometheuscommunity/postgres-exporter:v0.11.1
     command: "--log.level=debug"
     environment:
-      DATA_SOURCE_URI: "pg-1:5432/your?sslmode=disable"
-      DATA_SOURCE_USER: root
-      DATA_SOURCE_PASS: secret
+      DATA_SOURCE_URI: "postgres:5432/your?sslmode=disable"
+      DATA_SOURCE_USER: "postgres"
+      DATA_SOURCE_PASS: "secret"
       PG_EXPORTER_EXTEND_QUERY_PATH: "/etc/postgres_exporter/queries.yaml"
     volumes:
       - "./config/postgres/queries.yaml:/etc/postgres_exporter/queries.yaml:ro"
     ports:
       - "9187:9187"
     networks:
-      - postgres
+      - postgres-network
     restart: unless-stopped
     depends_on:
-      - pg-1
-  postgres-exporter-2:
-    image: prometheuscommunity/postgres-exporter:v0.11.1
-    command: "--log.level=debug"
-    environment:
-      DATA_SOURCE_URI: "pg-2:5432/your?sslmode=disable"
-      DATA_SOURCE_USER: root
-      DATA_SOURCE_PASS: secret
-      PG_EXPORTER_EXTEND_QUERY_PATH: "/etc/postgres_exporter/queries.yaml"
-    volumes:
-      - "./config/postgres/queries.yaml:/etc/postgres_exporter/queries.yaml:ro"
-    ports:
-      - "9188:9187"
-    networks:
       - postgres
-    restart: unless-stopped
-    depends_on:
-      - pg-2
-  postgres-exporter-3:
-    image: prometheuscommunity/postgres-exporter:v0.11.1
-    command: "--log.level=debug"
-    environment:
-      DATA_SOURCE_URI: "pg-3:5432/your?sslmode=disable"
-      DATA_SOURCE_USER: root
-      DATA_SOURCE_PASS: secret
-      PG_EXPORTER_EXTEND_QUERY_PATH: "/etc/postgres_exporter/queries.yaml"
-    volumes:
-      - "./config/postgres/queries.yaml:/etc/postgres_exporter/queries.yaml:ro"
-    ports:
-      - "9189:9187"
-    networks:
-      - postgres
-    restart: unless-stopped
-    depends_on:
-      - pg-2
 
   your-backend:
     image: openjdk:21
@@ -225,8 +123,8 @@ networks:
       driver: default
       config:
         - subnet: 192.168.0.0/24
-  postgres:
-    name: postgres
+  postgres-network:
+    name: postgres-network
     driver: bridge
   monitoring:
     name: monitoring
