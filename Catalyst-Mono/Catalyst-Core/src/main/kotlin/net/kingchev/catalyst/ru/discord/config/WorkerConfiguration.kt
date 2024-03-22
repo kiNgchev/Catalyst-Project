@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Lazy
+import org.springframework.context.annotation.Scope
 
 @Configuration
 @Import(
@@ -33,6 +34,7 @@ class WorkerConfiguration {
     lateinit var eventHolder: EventHolderService
 
     @Lazy(false)
+    @Scope("singleton")
     @Bean(name = [JDA_BEAN_NAME])
     fun jda(): ShardManager {
         val jda = DefaultShardManagerBuilder
