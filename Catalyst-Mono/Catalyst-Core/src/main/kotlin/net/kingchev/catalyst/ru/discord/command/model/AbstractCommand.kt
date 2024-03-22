@@ -37,16 +37,16 @@ abstract class AbstractCommand : Command {
         val member = context.authorMember
 
         if (guild != null && annotation.dmOnly) {
-            return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
+            return internalCommandService.fail(context, CommandStatus.DM_ONLY_ERROR)
         }
         if (guild == null && annotation.guildOnly) {
             return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
         }
         if (guild != null && !guild.selfMember.hasPermission(annotation.permissions.toList())) {
-            return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
+            return internalCommandService.fail(context, CommandStatus.BOT_PERMISSIONS_ERROR)
         }
         if (member != null && !context.authorMember.hasPermission(message.channel.asGuildMessageChannel(), annotation.userPermission.toList())) {
-            return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
+            return internalCommandService.fail(context, CommandStatus.USER_PERMISSIONS_ERROR)
         }
         return CommandStatus.SUCCESS
     }
@@ -59,16 +59,16 @@ abstract class AbstractCommand : Command {
         val member = context.authorMember
 
         if (guild != null && annotation.dmOnly) {
-            return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
+            return internalCommandService.fail(context, CommandStatus.DM_ONLY_ERROR)
         }
         if (guild == null && annotation.guildOnly) {
             return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
         }
         if (guild != null && !guild.selfMember.hasPermission(annotation.permissions.toList())) {
-            return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
+            return internalCommandService.fail(context, CommandStatus.BOT_PERMISSIONS_ERROR)
         }
         if (member != null && !context.authorMember.hasPermission(message.guildChannel, annotation.userPermission.toList())) {
-            return internalCommandService.fail(context, CommandStatus.GUILD_ONLY_ERROR)
+            return internalCommandService.fail(context, CommandStatus.USER_PERMISSIONS_ERROR)
         }
         return CommandStatus.SUCCESS
     }
