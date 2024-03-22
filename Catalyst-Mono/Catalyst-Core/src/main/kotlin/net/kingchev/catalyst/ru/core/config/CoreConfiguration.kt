@@ -19,7 +19,6 @@ import org.springframework.web.reactive.config.EnableWebFlux
     RedisConfiguration::class,
 )
 @Configuration
-@EnableWebFlux
 @EnableTransactionManagement
 @EnableConfigurationProperties
 @EnableR2dbcRepositories(basePackages = ["net.kingchev.catalyst.ru.core.persistence.repository"])
