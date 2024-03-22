@@ -10,7 +10,6 @@ import org.springframework.web.reactive.config.EnableWebFlux
 @Import(
     CoreConfiguration::class
 )
-@EnableWebFlux
 @ComponentScan(basePackages = ["net.kingchev.catalyst.ru.api"])
 class ApiConfiguration {
 }
