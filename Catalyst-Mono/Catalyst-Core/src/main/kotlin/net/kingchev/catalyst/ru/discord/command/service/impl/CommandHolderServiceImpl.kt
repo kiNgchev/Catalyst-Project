@@ -8,12 +8,14 @@ import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.concurrent.thread
 
 @Service
+@Scope("singleton")
 class CommandHolderServiceImpl : CommandHolderService {
 
     private val commands: HashMap<String, Command> = hashMapOf();

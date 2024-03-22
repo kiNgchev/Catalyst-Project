@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service
 
 @Service
 @Lazy(value = false)
-class DiscordServiceImpl : DiscordService {
+class DiscordServiceImpl(
+    @Autowired val jda: ShardManager
+) : DiscordService {
 
     @Autowired
     private lateinit var workerProperties: WorkerProperties;
@@ -28,24 +30,8 @@ class DiscordServiceImpl : DiscordService {
     @Autowired
     lateinit var eventHolder: EventHolderService
 
-    private lateinit var jda: ShardManager
-
-    fun getJDA(): ShardManager {
-        return jda
-    }
-
     @PostConstruct
-    fun init() {
-        this.jda = DefaultShardManagerBuilder
-            .createDefault(workerProperties.discord.token)
-            .addEventListeners(eventHolder.getEvents())
-            .setShardsTotal(workerProperties.discord.shardsCount)
-            .enableIntents(GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS))
-            .build()
-        jda.shards.stream()
-            .parallel()
-            .forEach { commandHolder.registerSlashCommand(it) }
-    }
+    fun init() {}
 
     @PreDestroy
     fun destroy() {}
