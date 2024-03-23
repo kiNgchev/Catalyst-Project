@@ -25,6 +25,12 @@ class UserConfigServiceImpl : UserConfigService {
     }
 
     @Transactional
+    @CachePut(cacheNames = ["user_config"], key = "#id")
+    override fun getById(id: Long?): Mono<UserConfig> {
+        return getById(id ?: -1)
+    }
+
+    @Transactional
     @CacheEvict(cacheNames = ["user_config"])
     override fun save(config: UserConfig): Mono<UserConfig> {
         return repository.save(config)

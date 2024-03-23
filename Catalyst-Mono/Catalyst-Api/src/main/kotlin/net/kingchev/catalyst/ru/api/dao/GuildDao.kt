@@ -21,7 +21,7 @@ class GuildDao : AbstractDao() {
     }
 
     @Transactional
-    fun saveUserConfig(guildConfigDto: GuildConfigDto, userId: Long): Mono<GuildConfig> {
+    fun saveGuildConfig(guildConfigDto: GuildConfigDto, userId: Long): Mono<GuildConfig> {
         return guildConfigService.getById(userId)
             .flatMap {
                 configMapper.updateGuildConfig(guildConfigDto, it)

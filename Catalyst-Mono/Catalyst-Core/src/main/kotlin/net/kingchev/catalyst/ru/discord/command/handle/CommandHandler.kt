@@ -66,7 +66,7 @@ class CommandHandler : ListenerAdapter(), Event {
             authorMember = message.member,
             args = args,
             guildLocale = guildConfigService
-                .getById(guild?.idLong ?: -1L)
+                .getById(guild?.idLong)
                 .block()?.locale
                 ?: LocaleUtils.DEFAULT.language,
             userLocale = userConfigService
@@ -104,7 +104,7 @@ class CommandHandler : ListenerAdapter(), Event {
             authorMember = interaction.member,
             options = event.interaction.options,
             guildLocale = guildConfigService
-                .getById(guild?.idLong ?: -1L)
+                .getById(guild?.idLong)
                 .block()?.locale
                 ?: LocaleUtils.DEFAULT.language,
             userLocale = userConfigService

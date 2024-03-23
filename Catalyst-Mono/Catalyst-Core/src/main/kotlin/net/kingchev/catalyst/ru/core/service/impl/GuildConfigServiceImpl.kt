@@ -25,6 +25,12 @@ class GuildConfigServiceImpl : GuildConfigService {
     }
 
     @Transactional
+    @CachePut(cacheNames = ["guild_config"], key = "#id")
+    override fun getById(id: Long?): Mono<GuildConfig> {
+        return getById(id ?: -1)
+    }
+
+    @Transactional
     @CacheEvict(cacheNames = ["guild_config"])
     override fun save(config: GuildConfig): Mono<GuildConfig> {
         return repository.save(config)

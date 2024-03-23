@@ -6,6 +6,8 @@ import reactor.core.publisher.Mono
 interface GuildConfigService {
     fun getById(id: Long): Mono<GuildConfig>
 
+    fun getById(id: Long?): Mono<GuildConfig>
+
     fun save(config: GuildConfig): Mono<GuildConfig>
 
     fun delete(config: GuildConfig)

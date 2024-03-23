@@ -22,7 +22,7 @@ class GuildConfigController {
 
     @PostMapping("/guilds")
     fun updateGuildConfig(@RequestBody config: GuildConfigDto): Mono<ResponseEntity<GuildConfig>> {
-        return guildDao.saveUserConfig(config, config.guildId ?: -1)
+        return guildDao.saveGuildConfig(config, config.guildId ?: -1)
             .map { ResponseEntity.ok(it) }
     }
 }

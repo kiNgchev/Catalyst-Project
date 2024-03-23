@@ -1,8 +1,9 @@
 package net.kingchev.catalyst.ru.api.dto
 
+import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import java.io.Serializable
 
 data class UserConfigDto(
     val userId: Long? = null,
-    val locale: String? = null
+    val locale: String = LocaleUtils.DEFAULT.language
 ) : Serializable
