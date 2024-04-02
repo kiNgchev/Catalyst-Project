@@ -1,17 +1,20 @@
-package net.kingchev.catalyst.ru.discord.message.service.impl
+Ôªøpackage net.kingchev.catalyst.ru.discord.message.service.impl
 
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.MessageEmbed
+import net.kingchev.catalyst.ru.core.config.CoreProperties
 import net.kingchev.catalyst.ru.core.localezied.service.LocaleService
 import net.kingchev.catalyst.ru.discord.message.service.MessageService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.Locale
 
 @Service
 class MessageServiceImpl : MessageService {
     @Autowired
     private lateinit var localeService: LocaleService
+
+    @Autowired
+    private lateinit var coreProperties: CoreProperties
 
     override fun getBaseEmbed(title: String): EmbedBuilder {
         return getBaseEmbed(title, false)
@@ -20,7 +23,7 @@ class MessageServiceImpl : MessageService {
     override fun getBaseEmbed(title: String, copyright: Boolean): EmbedBuilder {
         val builder = EmbedBuilder()
             .setTitle(title)
-        if (copyright) builder.setFooter(" ÓÔË‡ÈÚ ÚËÔ‡")
+        if (copyright) builder.setFooter("–§—É—Ç–µ—Ä —Ç–∏–ø–∞")
         return builder
     }
 
@@ -30,6 +33,7 @@ class MessageServiceImpl : MessageService {
 
     override fun getErrorEmbed(title: String, description: String): MessageEmbed {
         return getBaseEmbed(title)
+            .setColor(coreProperties.colors.errorColor)
             .setDescription(description)
             .build()
     }

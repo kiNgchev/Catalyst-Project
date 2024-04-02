@@ -79,7 +79,7 @@ class SetLocaleCommand : AbstractCommand() {
         if (!LocaleUtils.containsLang(context.args[0])) {
             val embed = messageService.getErrorEmbed(
                 localeService.getMessage("discord.command.error.title", locale),
-                localeService.getMessage("discord.command.error.set.language.notbeset", locale, lang.language)
+                localeService.getMessage("discord.command.error.set.language.notbeset", locale, context.args[0])
             )
             event.message.replyEmbeds(embed).queue()
             return false
@@ -101,7 +101,9 @@ class SetLocaleCommand : AbstractCommand() {
         locale = context.getLocale()
 
         val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.set.language.title", locale))
-            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang.language))
+            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang.nativeName, lang.emoji))
+            .setColor(coreProperties.colors.purple)
+            .setFooter(localeService.getMessage("discord.command.set.language.footer", locale))
             .build()
         event.message.replyEmbeds(embed).queue()
         return true
@@ -111,12 +113,13 @@ class SetLocaleCommand : AbstractCommand() {
         var locale = context.getLocale()
 
         val lang = LocaleUtils.parse(context.options[0].asString)
+
         if (!LocaleUtils.containsLang(context.options[0].asString)) {
             val embed = messageService.getErrorEmbed(
                 localeService.getMessage("discord.command.error.title", locale),
-                localeService.getMessage("discord.command.error.set.language.notbeset", locale, lang.language)
+                localeService.getMessage("discord.command.error.set.language.notbeset", locale, context.options[0].asString)
             )
-            event.interaction.replyEmbeds(embed)
+            event.interaction.replyEmbeds(embed).queue()
             return false
         }
 
@@ -136,7 +139,9 @@ class SetLocaleCommand : AbstractCommand() {
         locale = context.getLocale()
 
         val embed = messageService.getBaseEmbed(localeService.getMessage("discord.command.set.language.title", locale))
-            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang.language))
+            .setDescription(localeService.getMessage("discord.command.set.language.description", locale, lang.nativeName, lang.emoji))
+            .setColor(coreProperties.colors.purple)
+            .setFooter(localeService.getMessage("discord.command.set.language.footer", locale))
             .build()
         event.interaction.replyEmbeds(embed).queue()
         return true

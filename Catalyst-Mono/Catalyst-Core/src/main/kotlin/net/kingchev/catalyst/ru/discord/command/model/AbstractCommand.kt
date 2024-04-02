@@ -3,11 +3,13 @@ package net.kingchev.catalyst.ru.discord.command.model
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
+import net.kingchev.catalyst.ru.core.config.CoreProperties
 import net.kingchev.catalyst.ru.core.localezied.service.LocaleService
 import net.kingchev.catalyst.ru.core.model.CommandStatus
 import net.kingchev.catalyst.ru.core.service.GuildConfigService
 import net.kingchev.catalyst.ru.core.service.UserConfigService
 import net.kingchev.catalyst.ru.discord.command.service.InternalCommandService
+import net.kingchev.catalyst.ru.discord.config.WorkerProperties
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
 import net.kingchev.catalyst.ru.discord.context.model.SlashContext
 import net.kingchev.catalyst.ru.discord.message.service.MessageService
@@ -28,6 +30,12 @@ abstract class AbstractCommand : Command {
 
     @Autowired
     protected lateinit var userConfigService: UserConfigService
+
+    @Autowired
+    protected lateinit var coreProperties: CoreProperties
+
+    @Autowired
+    protected lateinit var workerProperties: WorkerProperties
 
     open override fun isAvailable(event: MessageReceivedEvent, context: MessageContext): CommandStatus {
         val annotation = getAnnotation()
