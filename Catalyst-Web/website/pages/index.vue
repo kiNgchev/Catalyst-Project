@@ -103,15 +103,6 @@
             <p>- Founder, Owner, Backend Developerㅤㅤㅤ</p>
           </div>
           <br />
-          <div class="developer-profile-container">
-            <img
-              src="/avatars/mefaldemisov.jpg"
-              alt="MefAldemisov"
-              class="developers-picture"
-            />
-            <h2>ㅤㅤMefAldemisov(MEFALDEMISOV)ㅤ</h2>
-            <p>- Frontend Developerㅤㅤㅤㅤㅤ</p>
-          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,8 @@
 <template>
   <div class="forum-container-view">
+    <div class="forum-portal-view">
+
+    </div>
     <div class="side">
       <div class="side-components">
         <br />
@@ -14,6 +17,9 @@
 </template>
 
 <style>
+.forum-portal-view {
+
+}
 .side {
   position: fixed;
   width: 200px;
