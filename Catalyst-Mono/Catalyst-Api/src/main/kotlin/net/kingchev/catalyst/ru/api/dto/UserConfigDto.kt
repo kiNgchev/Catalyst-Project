@@ -4,6 +4,6 @@ import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import java.io.Serializable
 
 data class UserConfigDto(
-    val userId: Long? = null,
-    val locale: String = LocaleUtils.DEFAULT.language
+    var userId: Long? = null,
+    var locale: String = LocaleUtils.DEFAULT.language
 ) : Serializable

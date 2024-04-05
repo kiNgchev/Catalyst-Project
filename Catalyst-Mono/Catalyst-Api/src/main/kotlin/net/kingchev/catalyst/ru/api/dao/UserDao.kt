@@ -25,8 +25,6 @@ class UserDao : AbstractDao()  {
         return userConfigService.getById(userId)
             .flatMap {
                 configMapper.updateUserConfig(userConfigDto, it)
-                println(it.userId)
-                println(userConfigDto)
                 userConfigService.save(it)
             }
     }
