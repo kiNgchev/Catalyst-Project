@@ -25,7 +25,7 @@ class UserConfigServiceImpl : UserConfigService {
     }
 
     @Transactional
-    @CachePut(cacheNames = ["user_config"], key = "#id")
+    @CachePut(cacheNames = ["user_config"], key = "#id ?: -1L")
     override fun getById(id: Long?): Mono<UserConfig> {
         return getById(id ?: -1)
     }

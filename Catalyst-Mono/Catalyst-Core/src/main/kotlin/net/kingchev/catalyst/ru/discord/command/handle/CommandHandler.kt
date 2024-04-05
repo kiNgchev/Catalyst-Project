@@ -14,6 +14,7 @@ import net.kingchev.catalyst.ru.discord.command.service.InternalCommandService
 import net.kingchev.catalyst.ru.discord.config.WorkerProperties
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
 import net.kingchev.catalyst.ru.discord.context.model.SlashContext
+import net.kingchev.catalyst.ru.discord.context.service.ContextService
 import net.kingchev.catalyst.ru.discord.event.model.CatalystEvent
 import net.kingchev.catalyst.ru.discord.event.model.Event
 import org.springframework.beans.factory.annotation.Autowired
@@ -59,21 +60,16 @@ class CommandHandler : ListenerAdapter(), Event {
             guild = message.guild
         } catch (_: IllegalStateException) {}
 
-        val context = MessageContext(
-            message = message,
-            guild = guild,
-            author = message.author,
-            authorMember = message.member,
-            args = args,
-            guildLocale = guildConfigService
-                .getById(guild?.idLong)
-                .block()?.locale
-                ?: LocaleUtils.DEFAULT.language,
-            userLocale = userConfigService
-                .getById(event.author.idLong)
-                .block()?.locale
-                ?: LocaleUtils.DEFAULT.language
-        )
+        val guildLocale = guildConfigService
+            .getById(guild?.idLong)
+            .block()?.locale
+            ?: LocaleUtils.DEFAULT.language
+        val userLocale = userConfigService
+            .getById(message.author.idLong)
+            .block()?.locale
+            ?: LocaleUtils.DEFAULT.language
+
+        val context = ContextService.createMessageContext(event, guildLocale, userLocale, args)
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
             if (cmd.execute(event, context))
@@ -92,26 +88,16 @@ class CommandHandler : ListenerAdapter(), Event {
             return
         }
 
-        var guild: Guild? = null
-        try {
-            guild = interaction.guild
-        } catch (_: IllegalStateException) {}
+        val guildLocale = guildConfigService
+            .getById(interaction.guild?.idLong)
+            .block()?.locale
+            ?: LocaleUtils.DEFAULT.language
+        val userLocale = userConfigService
+            .getById(event.user.idLong)
+            .block()?.locale
+            ?: LocaleUtils.DEFAULT.language
 
-        val context = SlashContext(
-            interaction = interaction,
-            guild = guild,
-            author = interaction.user,
-            authorMember = interaction.member,
-            options = event.interaction.options,
-            guildLocale = guildConfigService
-                .getById(guild?.idLong)
-                .block()?.locale
-                ?: LocaleUtils.DEFAULT.language,
-            userLocale = userConfigService
-                .getById(event.user.idLong)
-                .block()?.locale
-                ?: LocaleUtils.DEFAULT.language
-        )
+        val context = ContextService.createSlashContext(event, guildLocale, userLocale)
 
         if (cmd.isAvailable(event, context) == CommandStatus.SUCCESS) {
             if (cmd.execute(event, context))

@@ -25,7 +25,7 @@ class GuildConfigServiceImpl : GuildConfigService {
     }
 
     @Transactional
-    @CachePut(cacheNames = ["guild_config"], key = "#id")
+    @CachePut(cacheNames = ["guild_config"], key = "#id ?: -1L")
     override fun getById(id: Long?): Mono<GuildConfig> {
         return getById(id ?: -1)
     }

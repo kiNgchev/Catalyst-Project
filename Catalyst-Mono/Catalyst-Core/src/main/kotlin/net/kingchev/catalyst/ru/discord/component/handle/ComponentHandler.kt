@@ -5,24 +5,33 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.events.interaction.component.EntitySelectInteractionEvent
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
+import net.kingchev.catalyst.ru.discord.component.service.ComponentHolderService
 import net.kingchev.catalyst.ru.discord.event.model.CatalystEvent
 import net.kingchev.catalyst.ru.discord.event.model.Event
+import org.springframework.beans.factory.annotation.Autowired
 
 @CatalystEvent(eventName = "ComponentHandlerEvent")
 class ComponentHandler : ListenerAdapter(), Event {
+    @Autowired
+    private lateinit var componentHolderService: ComponentHolderService
+
     override fun onButtonInteraction(event: ButtonInteractionEvent) {
-        super.onButtonInteraction(event)
+        val component = componentHolderService.getButton(event.componentId)
+        component.execute(event)
     }
 
     override fun onStringSelectInteraction(event: StringSelectInteractionEvent) {
-        super.onStringSelectInteraction(event)
+        val component = componentHolderService.getSelect(event.componentId)
+        component.execute(event)
     }
 
     override fun onEntitySelectInteraction(event: EntitySelectInteractionEvent) {
-        super.onEntitySelectInteraction(event)
+        val component = componentHolderService.getSelect(event.componentId)
+        component.execute(event)
     }
 
     override fun onModalInteraction(event: ModalInteractionEvent) {
-        super.onModalInteraction(event)
+        val component = componentHolderService.getModal(event.modalId)
+        component.execute(event)
     }
 }
