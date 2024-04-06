@@ -13,7 +13,6 @@ import org.springframework.scheduling.TaskScheduler
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import org.springframework.web.reactive.config.EnableWebFlux
 
 @Import(
     RedisConfiguration::class,
@@ -26,7 +25,7 @@ import org.springframework.web.reactive.config.EnableWebFlux
 @ComponentScan(basePackages = ["net.kingchev.catalyst.ru.core"])
 class CoreConfiguration {
     @Autowired
-    lateinit var coreProperties: CoreProperties;
+    lateinit var coreProperties: CoreProperties
 
     @Bean
     fun taskScheduler(): TaskScheduler {

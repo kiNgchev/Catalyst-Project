@@ -1,7 +1,6 @@
 package net.kingchev.catalyst.ru.core.utils
 
 import net.kingchev.catalyst.ru.core.model.CatalystLang
-import java.util.*
 
 object LocaleUtils {
     @JvmStatic

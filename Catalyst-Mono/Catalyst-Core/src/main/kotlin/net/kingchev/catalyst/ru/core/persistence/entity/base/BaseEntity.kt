@@ -2,7 +2,7 @@ package net.kingchev.catalyst.ru.core.persistence.entity.base
 
 import org.springframework.data.annotation.Id
 import java.io.Serializable
-import java.util.Objects
+import java.util.*
 
 abstract class BaseEntity : Serializable {
     @Id

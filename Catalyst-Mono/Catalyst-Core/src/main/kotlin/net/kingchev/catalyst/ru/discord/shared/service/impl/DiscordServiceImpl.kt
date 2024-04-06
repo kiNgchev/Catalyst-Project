@@ -3,11 +3,7 @@ package net.kingchev.catalyst.ru.discord.shared.service.impl
 import jakarta.annotation.PostConstruct
 import jakarta.annotation.PreDestroy
 import net.dv8tion.jda.api.entities.Guild
-import net.dv8tion.jda.api.hooks.EventListener
-import net.dv8tion.jda.api.requests.GatewayIntent
-import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
 import net.dv8tion.jda.api.sharding.ShardManager
-import net.kingchev.catalyst.ru.core.config.CoreProperties
 import net.kingchev.catalyst.ru.core.model.GuildInfo
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
 import net.kingchev.catalyst.ru.discord.config.WorkerProperties
@@ -24,7 +20,7 @@ class DiscordServiceImpl(
 ) : DiscordService {
 
     @Autowired
-    private lateinit var workerProperties: WorkerProperties;
+    private lateinit var workerProperties: WorkerProperties
 
     @Autowired
     lateinit var commandHolder: CommandHolderService

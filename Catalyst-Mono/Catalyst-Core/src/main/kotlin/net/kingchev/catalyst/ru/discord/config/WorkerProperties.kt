@@ -7,7 +7,6 @@ import org.springframework.context.annotation.PropertySource
 import org.springframework.context.annotation.PropertySources
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
-import kotlin.properties.Delegates
 
 @Component
 @Scope(scopeName = "singleton")

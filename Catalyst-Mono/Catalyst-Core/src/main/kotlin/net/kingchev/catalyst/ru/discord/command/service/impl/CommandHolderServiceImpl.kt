@@ -1,7 +1,6 @@
 package net.kingchev.catalyst.ru.discord.command.service.impl
 
 import net.dv8tion.jda.api.JDA
-import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.kingchev.catalyst.ru.discord.command.model.CatalystCommand
 import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
@@ -10,15 +9,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Service
-import java.util.stream.Collectors
-import java.util.stream.Stream
-import kotlin.concurrent.thread
 
 @Service
 @Scope("singleton")
 class CommandHolderServiceImpl : CommandHolderService {
 
-    private val commands: HashMap<String, Command> = hashMapOf();
+    private val commands: HashMap<String, Command> = hashMapOf()
     private val aliases: HashMap<String, String> = hashMapOf()
 
     @Autowired

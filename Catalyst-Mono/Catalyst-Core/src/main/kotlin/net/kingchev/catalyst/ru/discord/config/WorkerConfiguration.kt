@@ -7,12 +7,7 @@ import net.kingchev.catalyst.ru.core.config.CoreConfiguration
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
 import net.kingchev.catalyst.ru.discord.event.service.EventHolderService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Import
-import org.springframework.context.annotation.Lazy
-import org.springframework.context.annotation.Scope
+import org.springframework.context.annotation.*
 
 @Configuration
 @Import(

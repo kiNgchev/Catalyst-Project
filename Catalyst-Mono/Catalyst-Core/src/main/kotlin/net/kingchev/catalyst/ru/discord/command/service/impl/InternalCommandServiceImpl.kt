@@ -1,8 +1,6 @@
 package net.kingchev.catalyst.ru.discord.command.service.impl
 
 import net.dv8tion.jda.api.entities.emoji.Emoji
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.kingchev.catalyst.ru.core.model.CommandStatus
 import net.kingchev.catalyst.ru.discord.command.service.InternalCommandService
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext

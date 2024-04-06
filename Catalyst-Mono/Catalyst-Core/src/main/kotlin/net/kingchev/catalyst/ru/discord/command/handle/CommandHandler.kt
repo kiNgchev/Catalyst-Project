@@ -12,8 +12,6 @@ import net.kingchev.catalyst.ru.discord.command.model.Command
 import net.kingchev.catalyst.ru.discord.command.service.CommandHolderService
 import net.kingchev.catalyst.ru.discord.command.service.InternalCommandService
 import net.kingchev.catalyst.ru.discord.config.WorkerProperties
-import net.kingchev.catalyst.ru.discord.context.model.MessageContext
-import net.kingchev.catalyst.ru.discord.context.model.SlashContext
 import net.kingchev.catalyst.ru.discord.context.service.ContextService
 import net.kingchev.catalyst.ru.discord.event.model.CatalystEvent
 import net.kingchev.catalyst.ru.discord.event.model.Event

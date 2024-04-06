@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.kingchev.catalyst.ru.discord.context.model.ComponentContext
 import net.kingchev.catalyst.ru.discord.context.model.MessageContext
 import net.kingchev.catalyst.ru.discord.context.model.SlashContext
-import java.util.Optional
+import java.util.*
 
 interface ContextService {
     fun getContext(id: String): Optional<ComponentContext>

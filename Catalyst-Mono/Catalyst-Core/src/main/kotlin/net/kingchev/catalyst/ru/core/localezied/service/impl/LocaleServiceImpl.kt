@@ -6,7 +6,6 @@ import net.kingchev.catalyst.ru.core.utils.LocaleUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.NoSuchMessageException
 import org.springframework.stereotype.Service
-import java.util.Locale
 
 @Service
 class LocaleServiceImpl : LocaleService {

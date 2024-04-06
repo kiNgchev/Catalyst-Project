@@ -1,7 +1,5 @@
 package net.kingchev.catalyst.ru.discord.component.service.impl
 
-import net.kingchev.catalyst.ru.discord.command.model.CatalystCommand
-import net.kingchev.catalyst.ru.discord.command.service.impl.CommandHolderServiceImpl.Companion.log
 import net.kingchev.catalyst.ru.discord.component.model.IButton
 import net.kingchev.catalyst.ru.discord.component.model.IComponent
 import net.kingchev.catalyst.ru.discord.component.model.IModal
